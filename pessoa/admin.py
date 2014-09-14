@@ -2,7 +2,7 @@ from django.contrib import admin
 from pessoa.models import Pessoa, Contato, Aluno
 from pessoa.forms import PessoaForm, AlunoForm
 
-class ContatoInline(admin.TabularInline):
+class ContatoInline(admin.StackedInline):
     model = Contato
     extra = 0
     min_num = 1

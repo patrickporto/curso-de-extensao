@@ -25,7 +25,7 @@ class Contato(models.Model):
     pessoa = models.ForeignKey(Pessoa)
 
     def __str__(self):
-        return "{0}: {1}".format(self.tipo, self.descricao)
+        return "{0} - {1}".format(dict(self.CHOICES_TIPO_CONTATO)[self.tipo], self.descricao)
 
 class Aluno(Pessoa):
     documentos = models.CharField(max_length=255, verbose_name='Documentos pendentes')
