@@ -28,7 +28,7 @@ CHOICES_DOCUMENTOS = (
 )
 
 
-class AlunoForm(forms.ModelForm):
+class AlunoForm(PessoaForm):
     documentos = forms.MultipleChoiceField(choices=CHOICES_DOCUMENTOS, widget=forms.CheckboxSelectMultiple,
                                            required=False, label='Documentos Pendentes')
     class Meta:
