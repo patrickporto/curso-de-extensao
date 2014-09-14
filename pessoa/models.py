@@ -26,3 +26,6 @@ class Contato(models.Model):
 
     def __str__(self):
         return "{0}: {1}".format(self.tipo, self.descricao)
+
+class Aluno(Pessoa):
+    documentos = models.CharField(max_length=255, verbose_name='Documentos pendentes')

@@ -1,6 +1,6 @@
 from django.contrib import admin
-from pessoa.models import Pessoa, Contato
-from pessoa.forms import PessoaForm
+from pessoa.models import Pessoa, Contato, Aluno
+from pessoa.forms import PessoaForm, AlunoForm
 
 class ContatoInline(admin.TabularInline):
     model = Contato
@@ -12,6 +12,9 @@ class PessoaAdmin(admin.ModelAdmin):
     list_display = ('nome_completo', 'cpf', 'data_nascimento')
     list_display_links = ('nome_completo', 'cpf',)
     search_fields = ('nome', 'sobrenome', 'cpf',)
-    list_filter = ('data_nascimento',)
     inlines = [ContatoInline]
     form = PessoaForm
+
+@admin.register(Aluno)
+class Aluno(PessoaAdmin):
+    form = AlunoForm
