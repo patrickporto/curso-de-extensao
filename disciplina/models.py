@@ -1,5 +1,5 @@
 from django.db import models
-from pessoa.models import Professor
+from pessoa.models import Professor, Aluno
 from datetime import datetime
 
 class Disciplina(models.Model):
@@ -13,3 +13,17 @@ class Disciplina(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+class Avaliacao(models.Model):
+    disciplina = models.ForeignKey(Disciplina)
+    aluno = models.ForeignKey(Aluno)
+    nota = models.DecimalField(verbose_name='Nota', decimal_places=2, max_digits=5, default=0)
+    faltas = models.IntegerField(verbose_name='Faltas', default=0)
+
+    def __str__(self):
+        return "{0} - {1}".format(self.aluno, self.disciplina)
+
+    class Meta:
+        verbose_name = "Avaliação"
+        verbose_name_plural = 'Avaliações'
