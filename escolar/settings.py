@@ -40,6 +40,7 @@ INSTALLED_APPS = (
 
 PROJECT_APPS = (
     'pessoa',
+    'disciplina',
 )
 
 INSTALLED_APPS += PROJECT_APPS
