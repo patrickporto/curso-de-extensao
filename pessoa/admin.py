@@ -14,6 +14,8 @@ class PessoaAdmin(admin.ModelAdmin):
     search_fields = ('nome', 'sobrenome', 'cpf',)
     inlines = [ContatoInline]
     form = PessoaForm
+    class Media:
+        js = ('js/django.jquery.js', 'js/jquery.inputmask.min.js', 'js/django.inputmask.js',)
 
 @admin.register(Aluno)
 class Aluno(PessoaAdmin):
