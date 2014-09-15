@@ -19,10 +19,10 @@ class PessoaAdmin(admin.ModelAdmin):
         js = ('js/django.jquery.js', 'js/jquery.inputmask.min.js', 'js/django.inputmask.js',)
 
 @admin.register(Aluno)
-class Aluno(PessoaAdmin):
+class AlunoAdmin(PessoaAdmin):
     form = AlunoForm
 
 
 @admin.register(Professor)
-class Professor(PessoaAdmin):
+class ProfessorAdmin(PessoaAdmin):
     form = ProfessorForm
