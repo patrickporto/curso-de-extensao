@@ -12,6 +12,7 @@ class PessoaAdmin(admin.ModelAdmin):
     list_display = ('nome_completo', 'cpf', 'data_nascimento')
     list_display_links = ('nome_completo', 'cpf',)
     search_fields = ('nome', 'sobrenome', 'cpf',)
+    readonly_fields = ('data_criacao', 'data_atualizacao',)
     inlines = [ContatoInline]
     form = PessoaForm
     class Media:

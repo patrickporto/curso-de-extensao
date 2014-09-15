@@ -1,10 +1,13 @@
 from django.db import models
+from datetime import datetime
 
 class Pessoa(models.Model):
     nome = models.CharField(max_length=255, verbose_name='Nome')
     sobrenome = models.CharField(max_length=255, verbose_name='Sobrenome')
     data_nascimento = models.DateField(verbose_name='Data de nascimento')
     cpf = models.CharField(max_length=14, verbose_name='CPF')
+    data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação', default=datetime.now())
+    data_atualizacao = models.DateTimeField(auto_now=True, verbose_name='Data de atualização', default=datetime.now())
 
     def __str__(self):
         return self.nome_completo()
