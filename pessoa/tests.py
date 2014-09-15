@@ -1,6 +1,6 @@
 from django.test import TestCase
 from datetime import date
-from pessoa.models import Pessoa, Contato, Aluno
+from pessoa.models import Pessoa, Contato, Aluno, Professor
 
 class PessoaTest(TestCase):
 
@@ -48,5 +48,30 @@ class AlunoTest(TestCase):
         )
 
         self.assertTrue(aluno)
+        self.assertTrue(contato_1)
+        self.assertTrue(contato_2)
+
+
+class ProfessorTest(TestCase):
+
+    def test_create_professor(self):
+        professor = Professor()
+        professor.nome = 'Fulano'
+        professor.sobrenome = 'da Silva'
+        professor.data_nascimento = date(1994, 1, 19)
+        professor.cpf = '111.111.111-11'
+        professor.save()
+        contato_1 = Contato.objects.create(
+            tipo=Contato.TELEFONE,
+            descricao='(00)0000-0000',
+            pessoa=professor
+        )
+        contato_2 = Contato.objects.create(
+            tipo=Contato.EMAIL,
+            descricao='fulano@email.com',
+            pessoa=professor
+        )
+
+        self.assertTrue(professor)
         self.assertTrue(contato_1)
         self.assertTrue(contato_2)

@@ -13,6 +13,7 @@ class Pessoa(models.Model):
         return "{0} {1}".format(self.nome, self.sobrenome)
     nome_completo.short_description = 'Nome completo'
 
+
 class Contato(models.Model):
     TELEFONE = 'telefone'
     EMAIL = 'email'
@@ -29,3 +30,8 @@ class Contato(models.Model):
 
 class Aluno(Pessoa):
     documentos = models.CharField(max_length=255, verbose_name='Documentos pendentes')
+
+
+class Professor(Pessoa):
+    class Meta:
+        verbose_name_plural = 'Professores'

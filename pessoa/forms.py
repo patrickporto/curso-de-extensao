@@ -1,5 +1,5 @@
 from django import forms
-from pessoa.models import Pessoa, Aluno
+from pessoa.models import Pessoa, Aluno, Professor
 from django_localflavor_br.forms import BRCPFField
 
 class PessoaForm(forms.ModelForm):
@@ -34,3 +34,9 @@ class AlunoForm(PessoaForm):
     class Meta:
         model = Aluno
         fields = ('nome', 'sobrenome', 'data_nascimento', 'cpf', 'documentos',)
+
+
+class ProfessorForm(PessoaForm):
+    class Meta:
+        model = Professor
+        fields = ('nome', 'sobrenome', 'data_nascimento', 'cpf',)
