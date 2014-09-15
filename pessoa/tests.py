@@ -72,6 +72,6 @@ class ProfessorTest(TestCase):
             pessoa=professor
         )
 
-        self.assertTrue(professor)
-        self.assertTrue(contato_1)
-        self.assertTrue(contato_2)
+        self.assertTrue(professor.pk)
+        self.assertTrue(contato_1.pk)
+        self.assertTrue(contato_2.pk)
