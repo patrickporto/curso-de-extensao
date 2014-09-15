@@ -3,7 +3,7 @@ from django.db import models
 class Pessoa(models.Model):
     nome = models.CharField(max_length=255, verbose_name='Nome')
     sobrenome = models.CharField(max_length=255, verbose_name='Sobrenome')
-    data_nascimento = models.DateField(verbose_name='Data de nscimento')
+    data_nascimento = models.DateField(verbose_name='Data de nascimento')
     cpf = models.CharField(max_length=14, verbose_name='CPF')
 
     def __str__(self):
