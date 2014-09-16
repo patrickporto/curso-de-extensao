@@ -1,3 +1,4 @@
 Django==1.7
 django-localflavor-br==1.0
-MySQL-python==1.2.5
+PyMySQL>=0.6.1
+gunicorn==19.1.1
