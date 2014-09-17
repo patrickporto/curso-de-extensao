@@ -1,7 +1,7 @@
 var updateMask = function() {
     var field = $(this).parent().parent().parent().find('.vTextField');
     if ($(this).val() === 'telefone') {
-        $(field).inputmask("(99)9999-9999");
+        $(field).inputmask("(99)9999[9]-9999");
     } else {
         $(field).inputmask("remove");
     }
