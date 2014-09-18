@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django import forms
 from pessoa.models import Pessoa, Aluno, Professor
-from django_localflavor_br.forms import BRCPFField
+from localflavor.br.forms import BRCPFField
 
 class PessoaForm(forms.ModelForm):
     cpf = BRCPFField()
