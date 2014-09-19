@@ -29,6 +29,8 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user.get_short_name }}<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="{% url 'alterar_senha' %}">Trocar senha</a></li>
+                                <li class="divider"></li>
                             	{% if request.user.is_staff %}
                                 <li><a href="{% url 'admin:index' %}">Área administrativa</a></li>
                                 <li class="divider"></li>

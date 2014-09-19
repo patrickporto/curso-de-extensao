@@ -9,4 +9,5 @@ urlpatterns = patterns('portal.views',
     url(r'^contato/', 'contato', name='contato'),
     url(r'^access/', 'access', name='access'),
     url(r'^logout/', 'user_logout', name='logout'),
+    url(r'^alterar_senha/', 'alterar_senha', name='alterar_senha'),
 )

@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 
 
@@ -27,3 +29,14 @@ def access(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+@login_required
+def alterar_senha(request):
+    form = PasswordChangeForm(request.user, request.POST or None)
+    if request.POST:
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Sua senha foi alterada com sucesso.')
+
+    return render(request, 'change_password.html', {'form': form})
