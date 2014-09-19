@@ -18,7 +18,6 @@ class Migration(migrations.Migration):
             name='Funcionario',
             fields=[
                 ('pessoa_ptr', models.OneToOneField(auto_created=True, primary_key=True, parent_link=True, to='pessoa.Pessoa', serialize=False)),
-                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },

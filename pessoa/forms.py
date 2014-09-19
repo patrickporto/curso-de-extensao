@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from pessoa.models import Pessoa, Aluno, Professor, Funcionario
+from pessoa.models import Pessoa, Aluno, Professor
 from localflavor.br.forms import BRCPFField
 from django.utils.translation import ugettext as _
 
@@ -43,9 +43,3 @@ class ProfessorForm(PessoaForm):
     class Meta:
         model = Professor
         fields = ('nome', 'sobrenome', 'data_nascimento', 'cpf',)
-
-
-class FuncionarioForm(PessoaForm):
-    class Meta:
-        model = Funcionario
-        fields = ('user', 'nome', 'sobrenome', 'data_nascimento', 'cpf',)

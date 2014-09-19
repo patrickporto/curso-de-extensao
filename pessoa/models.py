@@ -7,7 +7,7 @@ class Pessoa(models.Model):
     nome = models.CharField(max_length=255, verbose_name='Nome')
     sobrenome = models.CharField(max_length=255, verbose_name='Sobrenome')
     data_nascimento = models.DateField(verbose_name='Data de nascimento')
-    cpf = models.CharField(max_length=14, verbose_name='CPF')
+    cpf = models.CharField(max_length=14, verbose_name='CPF', unique=True)
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação', default=datetime.now())
     data_atualizacao = models.DateTimeField(auto_now=True, verbose_name='Data de atualização', default=datetime.now())
 
@@ -40,13 +40,3 @@ class Aluno(Pessoa):
 class Professor(Pessoa):
     class Meta:
         verbose_name_plural = 'Professores'
-
-
-class Funcionario(Pessoa):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, null=False, verbose_name='Usuário')
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            self.user.is_superuser = True
-            self.user.is_staff = True
-        super().save(*args, **kwargs)
