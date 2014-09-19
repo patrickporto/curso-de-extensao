@@ -63,3 +63,6 @@ class CustomUser(Pessoa, AbstractBaseUser):
 
 	def __str__(self):
 		return self.cpf
+
+	class Meta:
+		verbose_name = 'Usuário'
