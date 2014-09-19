@@ -10,7 +10,7 @@ class DisciplinaTest(TestCase):
         self.professor.nome = 'Fulano'
         self.professor.sobrenome = 'da Silva'
         self.professor.data_nascimento = date(1994, 1, 19)
-        self.professor.cpf = '111.111.111-11'
+        self.professor.cpf = '444.444.444-44'
         self.professor.save()
 
     def test_create_disciplina(self):
@@ -33,7 +33,7 @@ class AvaliacaoaTest(TestCase):
         self.professor.nome = 'Fulano'
         self.professor.sobrenome = 'da Silva'
         self.professor.data_nascimento = date(1984, 1, 19)
-        self.professor.cpf = '111.111.111-11'
+        self.professor.cpf = '555.555.555-55'
         self.professor.save()
 
         self.disciplina = Disciplina()

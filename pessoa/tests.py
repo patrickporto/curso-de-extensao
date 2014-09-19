@@ -34,7 +34,7 @@ class AlunoTest(TestCase):
         aluno.nome = 'Fulano'
         aluno.sobrenome = 'da Silva'
         aluno.data_nascimento = date(1994, 1, 19)
-        aluno.cpf = '111.111.111-11'
+        aluno.cpf = '222.222.222-22'
         aluno.save()
         contato_1 = Contato.objects.create(
             tipo=Contato.TELEFONE,
@@ -59,7 +59,7 @@ class ProfessorTest(TestCase):
         professor.nome = 'Fulano'
         professor.sobrenome = 'da Silva'
         professor.data_nascimento = date(1994, 1, 19)
-        professor.cpf = '111.111.111-11'
+        professor.cpf = '333.333.333-33'
         professor.save()
         contato_1 = Contato.objects.create(
             tipo=Contato.TELEFONE,
