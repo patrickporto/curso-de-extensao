@@ -24,15 +24,27 @@
 						{% item request 'home' %}
 						{% item request 'contato' %}
 					</ul>
-					<form class="navbar-form navbar-right">
+                    {% if request.user.is_authenticated %}
+					<ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user.get_short_name }}<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{% url 'logout' %}">Sair</a></li>
+                            </ul>
+                        </li>
+					</ul>
+                    {% else %}
+					<form class="navbar-form navbar-right" action="{% url 'access' %}" method="post">
+                        {% csrf_token %}
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Nome de usuário" name="username">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Senha" name="password">
+							<input type="password" class="form-control" placeholder="Senha" name="password">
 						</div>
 						<button type="submit" class="btn btn-default">Acessar</button>
 					</form>
+                    {% endif %}
 				</div>
 			</div>
 		</nav>
