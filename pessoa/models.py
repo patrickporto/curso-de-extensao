@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
+from django.conf import settings
 from datetime import datetime
 
 class Pessoa(models.Model):
@@ -39,3 +40,13 @@ class Aluno(Pessoa):
 class Professor(Pessoa):
     class Meta:
         verbose_name_plural = 'Professores'
+
+
+class Funcionario(Pessoa):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, null=False, verbose_name='Usuário')
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.user.is_superuser = True
+            self.user.is_staff = True
+        super().save(*args, **kwargs)
