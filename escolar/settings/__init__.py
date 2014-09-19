@@ -106,3 +106,8 @@ TEMPLATE_DIRS = (
 TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
 )
+
+BOOTSTRAP3 = {
+    'include_jquery': True,
+    'jquery_url': '/static/js/jquery-2.1.1.min.js',
+}
