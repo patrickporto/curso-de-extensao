@@ -17,12 +17,17 @@ def contato(request):
 def access(request):
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        login(request, user)
-        messages.add_message(request, messages.SUCCESS, 'Usuário autenticado com sucesso!')
+    if not username:
+        messages.add_message(request, messages.ERROR, 'O CPF do usuário é obrigatório')
+    elif not password:
+        messages.add_message(request, messages.ERROR, 'A senha do usuário é obrigatória')
     else:
-        messages.add_message(request, messages.ERROR, 'Usuário ou senha inválida!')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.add_message(request, messages.SUCCESS, 'Usuário autenticado com sucesso!')
+        else:
+            messages.add_message(request, messages.ERROR, 'Usuário ou senha inválida!')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
