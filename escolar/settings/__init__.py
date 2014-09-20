@@ -7,7 +7,7 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS, AUTHENTICATION_BACKENDS
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
@@ -115,3 +115,5 @@ BOOTSTRAP3 = {
 }
 
 AUTH_USER_MODEL = 'pessoa_auth.CustomUser'
+
+AUTHENTICATION_BACKENDS += ('pessoa_auth.backend.CustomBackend',)
