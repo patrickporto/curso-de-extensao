@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = (
 
 
 PROJECT_APPS = (
+    'core',
     'pessoa',
     'disciplina',
     'portal',
