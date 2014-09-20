@@ -52,7 +52,6 @@ PROJECT_APPS = (
     'pessoa',
     'disciplina',
     'portal',
-    'pessoa_auth',
 )
 
 INSTALLED_APPS += THIRD_PARTY_APPS + PROJECT_APPS
@@ -114,6 +113,6 @@ BOOTSTRAP3 = {
     'jquery_url': '/static/js/jquery-2.1.1.min.js',
 }
 
-AUTH_USER_MODEL = 'pessoa_auth.CustomUser'
+AUTH_USER_MODEL = 'pessoa.Pessoa'
 
-AUTHENTICATION_BACKENDS += ('pessoa_auth.backend.CustomBackend',)
+AUTHENTICATION_BACKENDS += ('pessoa.backend.CustomBackend',)

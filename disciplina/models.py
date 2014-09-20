@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
 from django.conf import settings
-from pessoa.models import Aluno
-from datetime import datetime
+from pessoa.models import Pessoa
+from django.utils import timezone
 
 class Disciplina(models.Model):
     nome = models.CharField(max_length=255, verbose_name='Nome')
@@ -10,8 +10,8 @@ class Disciplina(models.Model):
     data_inicio = models.DateField(verbose_name='Data de início')
     data_termino = models.DateField(verbose_name='Data de término')
     professor = models.ManyToManyField(settings.AUTH_USER_MODEL)
-    data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação', default=datetime.now())
-    data_atualizacao = models.DateTimeField(auto_now=True, verbose_name='Data de atualização', default=datetime.now())
+    data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação', default=timezone.now)
+    data_atualizacao = models.DateTimeField(auto_now=True, verbose_name='Data de atualização', default=timezone.now)
 
     def __str__(self):
         return self.nome
@@ -19,7 +19,7 @@ class Disciplina(models.Model):
 
 class Avaliacao(models.Model):
     disciplina = models.ForeignKey(Disciplina)
-    aluno = models.ForeignKey(Aluno)
+    aluno = models.ForeignKey(Pessoa, limit_choices_to={'tipo': Pessoa.ALUNO})
     nota = models.DecimalField(verbose_name='Nota', decimal_places=2, max_digits=5, default=0)
     faltas = models.IntegerField(verbose_name='Faltas', default=0)
 
