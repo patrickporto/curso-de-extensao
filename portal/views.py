@@ -42,6 +42,7 @@ def alterar_senha(request):
     if request.POST:
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, 'Sua senha foi alterada com sucesso.')
+            messages.add_message(request, messages.SUCCESS, 'Sua senha foi alterada com sucesso. Por favor, autentique-se novamente')
+            return HttpResponseRedirect('/')
 
     return render(request, 'change_password.html', {'form': form})
