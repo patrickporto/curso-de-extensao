@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
-from pessoa.models import Professor, Aluno
+from django.conf import settings
+from pessoa.models import Aluno
 from datetime import datetime
 
 class Disciplina(models.Model):
@@ -8,7 +9,7 @@ class Disciplina(models.Model):
     limite_faltas = models.IntegerField(verbose_name='Limite de faltas')
     data_inicio = models.DateField(verbose_name='Data de início')
     data_termino = models.DateField(verbose_name='Data de término')
-    professor = models.ManyToManyField(Professor)
+    professor = models.ManyToManyField(settings.AUTH_USER_MODEL)
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação', default=datetime.now())
     data_atualizacao = models.DateTimeField(auto_now=True, verbose_name='Data de atualização', default=datetime.now())
 

@@ -35,8 +35,3 @@ class Contato(models.Model):
 
 class Aluno(Pessoa):
     documentos = models.CharField(max_length=255, verbose_name='Documentos pendentes')
-
-
-class Professor(Pessoa):
-    class Meta:
-        verbose_name_plural = 'Professores'

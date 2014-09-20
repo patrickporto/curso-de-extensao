@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from pessoa.models import Pessoa, Contato, Aluno, Professor
-from pessoa.forms import PessoaForm, AlunoForm, ProfessorForm
+from pessoa.models import Pessoa, Contato, Aluno
+from pessoa.forms import PessoaForm, AlunoForm
 
 class ContatoInline(admin.StackedInline):
     model = Contato
@@ -22,8 +22,3 @@ class PessoaAdmin(admin.ModelAdmin):
 @admin.register(Aluno)
 class AlunoAdmin(PessoaAdmin):
     form = AlunoForm
-
-
-@admin.register(Professor)
-class ProfessorAdmin(PessoaAdmin):
-    form = ProfessorForm
