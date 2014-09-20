@@ -1,6 +1,6 @@
 from django.test import TestCase
 from datetime import date
-from pessoa.models import Pessoa, Contato, Pessoa
+from pessoa.models import Pessoa, Contato
 
 class PessoaTest(TestCase):
 
