@@ -49,7 +49,7 @@ class Pessoa(AbstractBaseUser):
         (ALUNO, 'Aluno'),
     )
     nome = models.CharField(max_length=255, verbose_name='Nome')
-    sobrenome = models.CharField(max_length=255, verbose_name='Sobrenome')
+    sobrenome = models.CharField(max_length=255, verbose_name='Sobrenome', blank=True)
     data_nascimento = models.DateField(verbose_name='Data de nascimento')
     cpf = models.CharField(max_length=14, verbose_name='CPF', unique=True)
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação', default=timezone.now)
