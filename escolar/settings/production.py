@@ -2,7 +2,7 @@ from escolar.settings import *
 
 ALLOWED_HOSTS = ('104.131.39.168',)
 
-DEBUG = False
+DEBUG = True
 
 DATABASES = {
     'default': {
