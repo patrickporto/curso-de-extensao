@@ -87,9 +87,9 @@ class Pessoa(AbstractBaseUser):
         return self.nome
 
     def __str__(self):
-        if self.tipo == self.ALUNO:
-            return "{0} - {1}".format(self.get_full_name(), self.cpf)
-        return self.get_full_name()
+        if self.tipo == self.FUNCIONARIO:
+            return self.get_full_name()
+        return "{0} - {1}".format(self.get_full_name(), self.cpf)
 
     class Meta:
         verbose_name = 'Pessoa'
