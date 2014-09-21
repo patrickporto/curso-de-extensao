@@ -109,8 +109,11 @@ class Contato(models.Model):
 
 
 class DocumentosPendentes(models.Model):
-    pessoa = models.OneToOneField(Pessoa)
+    pessoa = models.OneToOneField(Pessoa, limit_choices_to={'tipo': Pessoa.ALUNO})
     documentos = models.CharField(max_length=255, verbose_name='Documentos pendentes')
     class Meta:
         verbose_name = 'Documentos pendentes de aluno'
         verbose_name_plural = 'Documentos pendentes de aluno'
+
+    def __str__(self):
+        return self.pessoa.get_full_name()

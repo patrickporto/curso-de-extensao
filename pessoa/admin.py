@@ -1,14 +1,21 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin
-from pessoa.models import Pessoa, Contato
-from pessoa.forms import PessoaChangeForm, PessoaCreationForm
+from pessoa.models import Pessoa, Contato, DocumentosPendentes
+from pessoa.forms import PessoaChangeForm, PessoaCreationForm, DocumentosPendentesForm
 
 
 class ContatoInline(admin.StackedInline):
     model = Contato
     extra = 0
     min_num = 1
+
+
+class DocumentosPendentesInline(admin.StackedInline):
+    model = DocumentosPendentes
+    extra = 0
+    min_num = 1
+    form = DocumentosPendentesForm
 
 
 @admin.register(Pessoa)
@@ -18,7 +25,7 @@ class PessoaAdmin(UserAdmin):
     list_filter = ('tipo', 'is_active',)
     search_fields = ('nome', 'sobrenome', 'cpf',)
     readonly_fields = ('data_criacao', 'data_atualizacao',)
-    inlines = [ContatoInline]
+    inlines = [DocumentosPendentesInline, ContatoInline]
     form = PessoaChangeForm
     add_form = PessoaCreationForm
 
@@ -34,6 +41,11 @@ class PessoaAdmin(UserAdmin):
     ordering = ('nome', 'sobrenome',)
     filter_horizontal = ()
 
+    def get_formsets_with_inlines(self, request, obj=None):
+        for inline in self.get_inline_instances(request, obj):
+            if isinstance(inline, DocumentosPendentesInline) and (not obj or obj.tipo != obj.ALUNO):
+                continue
+            yield inline.get_formset(request, obj), inline
 
     class Media:
         js = ('js/django.jquery.js', 'js/jquery.inputmask.min.js', 'js/django.inputmask.js',)
