@@ -23,11 +23,10 @@ class DisciplinaTest(TestCase):
         disciplina.save()
         disciplina.professor.add(self.professor)
 
-        self.assertTrue(disciplina.pk)
         self.assertGreater(Disciplina.objects.select_related('professor').count(), 0)
 
 
-class AvaliacaoaTest(TestCase):
+class AvaliacaoTest(TestCase):
 
     def setUp(self):
         self.professor = Pessoa()
@@ -54,7 +53,6 @@ class AvaliacaoaTest(TestCase):
         self.aluno.tipo = Pessoa.ALUNO
         self.aluno.save()
 
-
     def test_create_nota(self):
         avaliacao = Avaliacao()
         avaliacao.disciplina = self.disciplina
@@ -62,5 +60,3 @@ class AvaliacaoaTest(TestCase):
         avaliacao.faltas = 6
         avaliacao.nota = 8
         avaliacao.save()
-
-        self.assertTrue(avaliacao.pk)

@@ -23,10 +23,6 @@ class PessoaTest(TestCase):
             pessoa=pessoa
         )
 
-        self.assertTrue(pessoa)
-        self.assertTrue(contato_1)
-        self.assertTrue(contato_2)
-
     def test_create_aluno(self):
         aluno = Pessoa()
         aluno.nome = 'Fulano'
@@ -46,10 +42,6 @@ class PessoaTest(TestCase):
             pessoa=aluno
         )
 
-        self.assertTrue(aluno)
-        self.assertTrue(contato_1)
-        self.assertTrue(contato_2)
-
     def test_create_professor(self):
         professor = Pessoa()
         professor.nome = 'Fulano'
@@ -68,7 +60,3 @@ class PessoaTest(TestCase):
             descricao='fulano@email.com',
             pessoa=professor
         )
-
-        self.assertTrue(professor.pk)
-        self.assertTrue(contato_1.pk)
-        self.assertTrue(contato_2.pk)
