@@ -17,6 +17,7 @@ class AvaliacaoAdmin(admin.ModelAdmin):
     list_display = ('aluno', 'disciplina', 'nota', 'faltas')
     list_editable = ('nota', 'faltas', )
     search_fields = ('aluno__nome', 'aluno__sobrenome', 'disciplina__nome', 'disciplina__professor__nome', 'disciplina__professor__sobrenome', )
+    list_filter = ('disciplina__periodo__nome', 'disciplina__nome',)
 
 
 @admin.register(Periodo)
