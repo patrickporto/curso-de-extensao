@@ -8,6 +8,9 @@ class DisciplinaForm(forms.ModelForm):
     professor = forms.ModelMultipleChoiceField(queryset=get_user_model().objects.filter(tipo=get_user_model().PROFESSOR),
                                                widget=widgets.FilteredSelectMultiple(
                                                    verbose_name='Professores', is_stacked=False))
+    aluno = forms.ModelMultipleChoiceField(queryset=get_user_model().objects.filter(tipo=get_user_model().ALUNO),
+                                               widget=widgets.FilteredSelectMultiple(
+                                                   verbose_name='Professores', is_stacked=False))
     class Meta:
         model = Disciplina
-        fields = ('nome', 'limite_faltas', 'periodo', 'professor',)
+        fields = ('nome', 'limite_faltas', 'periodo', 'professor', 'aluno',)
