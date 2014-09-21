@@ -24,11 +24,21 @@ class DisciplinaTest(TestCase):
         disciplina = Disciplina()
         disciplina.nome = ''
         disciplina.limite_faltas = 10
+        disciplina.professor = self.professor
         disciplina.save()
-        disciplina.professor.add(self.professor)
         disciplina.periodo.add(periodo)
 
-        self.assertGreater(Disciplina.objects.select_related('professor').count(), 0)
+        aluno = Pessoa()
+        aluno.nome = 'Fulaninho'
+        aluno.sobrenome = 'de Souza'
+        aluno.data_nascimento = date(1994, 1, 19)
+        aluno.cpf = '111.111.111-11'
+        aluno.tipo = Pessoa.ALUNO
+        aluno.save()
+        disciplina.aluno.add(aluno)
+        disciplina.save()
+
+        self.assertGreater(disciplina.aluno.count(), 0)
 
 
 class AvaliacaoTest(TestCase):
@@ -42,14 +52,6 @@ class AvaliacaoTest(TestCase):
         self.professor.tipo = Pessoa.PROFESSOR
         self.professor.save()
 
-        self.disciplina = Disciplina()
-        self.disciplina.nome = ''
-        self.disciplina.limite_faltas = 10
-        self.disciplina.data_inicio = date(2014, 1, 19)
-        self.disciplina.data_termino = date(2014, 5, 19)
-        self.disciplina.save()
-        self.disciplina.professor.add(self.professor)
-
         self.aluno = Pessoa()
         self.aluno.nome = 'Fulaninho'
         self.aluno.sobrenome = 'de Souza'
@@ -58,10 +60,23 @@ class AvaliacaoTest(TestCase):
         self.aluno.tipo = Pessoa.ALUNO
         self.aluno.save()
 
+        self.disciplina = Disciplina()
+        self.disciplina.nome = ''
+        self.disciplina.limite_faltas = 10
+        self.disciplina.data_inicio = date(2014, 1, 19)
+        self.disciplina.data_termino = date(2014, 5, 19)
+        self.disciplina.professor = self.professor
+        self.disciplina.save()
+        self.disciplina.aluno.add(self.aluno)
+        self.disciplina.save()
+
     def test_create_nota(self):
-        avaliacao = Avaliacao()
-        avaliacao.disciplina = self.disciplina
-        avaliacao.aluno = self.aluno
+        avaliacoes_count = Avaliacao.objects.filter(disciplina=self.disciplina).count()
+
+        self.assertEqual(avaliacoes_count, 1)
+
+    def test_edit_nota(self):
+        avaliacao = Avaliacao.objects.get(disciplina=self.disciplina, aluno=self.aluno)
         avaliacao.faltas = 6
         avaliacao.nota = 8
         avaliacao.save()

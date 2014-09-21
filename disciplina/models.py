@@ -37,3 +37,16 @@ class Avaliacao(models.Model):
     class Meta:
         verbose_name = "Avaliação"
         verbose_name_plural = 'Avaliações'
+
+
+def disciplina_post_save(sender, instance, *args, **kwargs):
+    alunos_com_avaliacao = Avaliacao.objects.filter(aluno=instance.aluno.all).values('aluno__pk')
+    alunos_sem_avaliacao = Pessoa.objects.filter(pk__in=instance.aluno.all).exclude(pk__in=alunos_com_avaliacao)
+
+    for aluno in alunos_sem_avaliacao:
+        avaliacao = Avaliacao()
+        avaliacao.disciplina = instance
+        avaliacao.aluno = aluno
+        avaliacao.save()
+
+models.signals.m2m_changed.connect(disciplina_post_save, sender=Disciplina.aluno.through)
