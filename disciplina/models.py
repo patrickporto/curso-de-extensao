@@ -29,7 +29,7 @@ class Disciplina(models.Model):
 class Avaliacao(models.Model):
     disciplina = models.ForeignKey(Disciplina)
     aluno = models.ForeignKey(Pessoa, limit_choices_to={'tipo': Pessoa.ALUNO})
-    nota = models.DecimalField(verbose_name='Nota', decimal_places=2, max_digits=5, default=0)
+    nota = models.DecimalField(verbose_name='Nota', decimal_places=2, max_digits=5, default=None, null=True, blank=True)
     faltas = models.IntegerField(verbose_name='Faltas', default=0)
 
     def __str__(self):
