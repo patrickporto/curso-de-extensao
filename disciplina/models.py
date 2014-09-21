@@ -5,7 +5,7 @@ from pessoa.models import Pessoa
 from django.utils import timezone
 
 class Periodo(models.Model):
-    nome = models.CharField(max_length=255)
+    nome = models.CharField(max_length=255, verbose_name="Período")
     data_inicio = models.DateField(verbose_name='Data de início', default=timezone.now)
     data_termino = models.DateField(verbose_name='Data de término', default=timezone.now)
 
@@ -14,7 +14,7 @@ class Periodo(models.Model):
 
 
 class Disciplina(models.Model):
-    nome = models.CharField(max_length=255, verbose_name='Nome')
+    nome = models.CharField(max_length=255, verbose_name='Disciplina')
     limite_faltas = models.IntegerField(verbose_name='Limite de faltas')
     periodo = models.ManyToManyField(Periodo)
     professor = models.ForeignKey(Pessoa, limit_choices_to={'tipo': Pessoa.PROFESSOR}, related_name='professor')
