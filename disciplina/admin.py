@@ -8,6 +8,7 @@ class DisciplinaAdmin(admin.ModelAdmin):
     list_display_links = ('nome',)
     search_fields = ('nome', 'professor__nome', 'professor__sobrenome',)
     readonly_fields = ('data_criacao', 'data_atualizacao',)
+    list_filter = ('periodo__nome',)
     form = DisciplinaForm
 
 
