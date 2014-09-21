@@ -10,4 +10,4 @@ class DisciplinaForm(forms.ModelForm):
                                                    verbose_name='Professores', is_stacked=False))
     class Meta:
         model = Disciplina
-        fields = ('nome', 'limite_faltas', 'data_inicio', 'data_termino', 'professor',)
+        fields = ('nome', 'limite_faltas', 'periodo', 'professor',)

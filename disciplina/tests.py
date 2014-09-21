@@ -1,6 +1,6 @@
 from django.test import TestCase
 from pessoa.models import Pessoa
-from disciplina.models import Disciplina, Avaliacao
+from disciplina.models import Disciplina, Avaliacao, Periodo
 from datetime import date
 
 class DisciplinaTest(TestCase):
@@ -15,13 +15,18 @@ class DisciplinaTest(TestCase):
         self.professor.save()
 
     def test_create_disciplina(self):
+        periodo = Periodo()
+        periodo.nome = '1 Semestre'
+        periodo.data_inicio = date(2014, 1, 19)
+        periodo.data_termino = date(2014, 5, 19)
+        periodo.save()
+
         disciplina = Disciplina()
         disciplina.nome = ''
         disciplina.limite_faltas = 10
-        disciplina.data_inicio = date(2014, 1, 19)
-        disciplina.data_termino = date(2014, 5, 19)
         disciplina.save()
         disciplina.professor.add(self.professor)
+        disciplina.periodo.add(periodo)
 
         self.assertGreater(Disciplina.objects.select_related('professor').count(), 0)
 
