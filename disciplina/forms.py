@@ -5,9 +5,6 @@ from django.contrib.admin import widgets
 from disciplina.models import Disciplina
 
 class DisciplinaForm(forms.ModelForm):
-    professor = forms.ModelMultipleChoiceField(queryset=get_user_model().objects.filter(tipo=get_user_model().PROFESSOR),
-                                               widget=widgets.FilteredSelectMultiple(
-                                                   verbose_name='Professores', is_stacked=False))
     aluno = forms.ModelMultipleChoiceField(queryset=get_user_model().objects.filter(tipo=get_user_model().ALUNO),
                                                widget=widgets.FilteredSelectMultiple(
                                                    verbose_name='Professores', is_stacked=False))

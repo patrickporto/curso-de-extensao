@@ -17,7 +17,7 @@ class Disciplina(models.Model):
     nome = models.CharField(max_length=255, verbose_name='Nome')
     limite_faltas = models.IntegerField(verbose_name='Limite de faltas')
     periodo = models.ManyToManyField(Periodo)
-    professor = models.ManyToManyField(Pessoa, limit_choices_to={'tipo': Pessoa.PROFESSOR}, related_name='professores')
+    professor = models.ForeignKey(Pessoa, limit_choices_to={'tipo': Pessoa.PROFESSOR}, related_name='professor')
     aluno = models.ManyToManyField(Pessoa, limit_choices_to={'tipo': Pessoa.ALUNO}, related_name='alunos')
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação', default=timezone.now)
     data_atualizacao = models.DateTimeField(auto_now=True, verbose_name='Data de atualização', default=timezone.now)
