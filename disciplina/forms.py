@@ -7,7 +7,7 @@ from disciplina.models import Disciplina
 class DisciplinaForm(forms.ModelForm):
     aluno = forms.ModelMultipleChoiceField(queryset=get_user_model().objects.filter(tipo=get_user_model().ALUNO),
                                                widget=widgets.FilteredSelectMultiple(
-                                                   verbose_name='Alunos', is_stacked=False))
+                                                   verbose_name='Alunos', is_stacked=False), required=False)
     class Meta:
         model = Disciplina
         fields = ('nome', 'limite_faltas', 'periodo', 'professor', 'aluno',)
