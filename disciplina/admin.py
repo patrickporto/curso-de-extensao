@@ -19,6 +19,17 @@ class AvaliacaoAdmin(admin.ModelAdmin):
     search_fields = ('aluno__nome', 'aluno__sobrenome', 'disciplina__nome', 'disciplina__professor__nome', 'disciplina__professor__sobrenome', )
     list_filter = ('disciplina__periodo__nome', 'disciplina__nome',)
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        del actions['delete_selected']
+        return actions
+
 
 @admin.register(Periodo)
 class PeriodoAdmin(admin.ModelAdmin):
