@@ -49,4 +49,4 @@ class DocumentosPendentesForm(forms.ModelForm):
 
     class Meta:
         model = DocumentosPendentes
-        fields = ('documentos',)
+        fields = ('documentos','outros')
