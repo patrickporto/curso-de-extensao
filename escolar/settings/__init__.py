@@ -52,6 +52,7 @@ PROJECT_APPS = (
     'pessoa',
     'disciplina',
     'portal',
+    'downloads',
 )
 
 INSTALLED_APPS += THIRD_PARTY_APPS + PROJECT_APPS
