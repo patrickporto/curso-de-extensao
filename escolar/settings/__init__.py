@@ -116,3 +116,7 @@ BOOTSTRAP3 = {
 AUTH_USER_MODEL = 'pessoa.Pessoa'
 
 AUTHENTICATION_BACKENDS += ('pessoa.backend.CustomBackend',)
+
+BUSINESS = {
+    'media_aprovacao': 5,
+}

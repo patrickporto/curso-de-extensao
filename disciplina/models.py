@@ -2,6 +2,27 @@
 from django.db import models
 from pessoa.models import Pessoa
 from django.utils import timezone
+from django.conf import settings
+
+
+class AvaliacaoQuerySet(models.QuerySet):
+    def aprovados(self):
+        return self.filter(nota__gte=settings.BUSINESS['media_aprovacao'],
+                                                faltas__lte=models.F('disciplina__limite_faltas'))
+    def reprovados(self):
+        return self.filter(models.Q(nota__lt=settings.BUSINESS['media_aprovacao']) |
+                                                models.Q(faltas__gt=models.F('disciplina__limite_faltas')))
+
+
+class AvaliacaoManager(models.Manager):
+    def get_queryset(self):
+        return AvaliacaoQuerySet(self.model, using=self._db)
+
+    def aprovados(self):
+        return self.get_queryset().aprovados()
+
+    def reprovados(self):
+        return self.get_queryset().reprovados()
 
 class Periodo(models.Model):
     nome = models.CharField(max_length=255, verbose_name="Período")
@@ -26,10 +47,21 @@ class Disciplina(models.Model):
 
 
 class Avaliacao(models.Model):
+    CURSANDO = 'cursando'
+    APROVADO = 'aprovado'
+    REPROVADO = 'reprovado'
+    CHOICES_SITUACAO = (
+        (CURSANDO, 'Cursando',),
+        (APROVADO, 'Aprovado',),
+        (REPROVADO, 'Reprovado'),
+    )
     disciplina = models.ForeignKey(Disciplina)
     aluno = models.ForeignKey(Pessoa, limit_choices_to={'tipo': Pessoa.ALUNO})
     nota = models.DecimalField(verbose_name='Nota', decimal_places=2, max_digits=5, default=None, null=True, blank=True)
     faltas = models.IntegerField(verbose_name='Faltas', default=0)
+    situacao = models.CharField(max_length=255, verbose_name='Situação', choices=CHOICES_SITUACAO, default=CURSANDO)
+
+    objects = AvaliacaoManager()
 
     def __str__(self):
         return "{0} - {1}".format(self.aluno, self.disciplina)
