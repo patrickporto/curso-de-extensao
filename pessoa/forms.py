@@ -2,6 +2,7 @@
 from django import forms
 from pessoa.models import Pessoa, DocumentosPendentes
 from localflavor.br.forms import BRCPFField
+from core.models import CHOICES_DOCUMENTOS
 
 
 class PessoaChangeForm(forms.ModelForm):
@@ -27,23 +28,6 @@ class PessoaCreationForm(PessoaChangeForm):
 
 
 class DocumentosPendentesForm(forms.ModelForm):
-    FOTOS = 1
-    CURRICULO = 2
-    HISTORICO_SUPERIOR = 3
-    RG = 4
-    TITULO_ELEITOR = 5
-    CERTIFICADO_RESERVISTA = 6
-    DIPLOMA_GRADUACAO = 7
-
-    CHOICES_DOCUMENTOS = (
-        (FOTOS, '2 fotos 3x4',),
-        (CURRICULO, 'Currículo',),
-        (HISTORICO_SUPERIOR, 'Histórico Nível Superior',),
-        (RG, 'Carteira Identidade',),
-        (TITULO_ELEITOR, 'Título de Eleitor',),
-        (CERTIFICADO_RESERVISTA, 'Certificado de Reservista',),
-        (DIPLOMA_GRADUACAO, 'Diploma de Graduação',),
-    )
     documentos = forms.MultipleChoiceField(choices=CHOICES_DOCUMENTOS, widget=forms.CheckboxSelectMultiple,
                                            required=False, label='Documentos Pendentes')
 

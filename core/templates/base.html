@@ -25,6 +25,9 @@
                         {% if request.user.is_authenticated and request.user.tipo == request.user.ALUNO %}
 						    {% item request 'disciplinas' %}
                         {% endif %}
+                        {% if request.user.is_authenticated and request.user.tipo == request.user.ALUNO %}
+						    {% item request 'documentos' %}
+                        {% endif %}
 						{% item request 'contato' %}
 					</ul>
                     {% if request.user.is_authenticated %}
@@ -59,8 +62,8 @@
 		</nav>
 		<ol class="breadcrumb">
 			<li>Portal</li>
-			{% for path in request.path|split:'/' %}
-				<li>{{ path|capfirst }}</li>
+			{% for item in request|breadcrumb %}
+				<li>{{ item }}</li>
 			{% endfor %}
 		</ol>
 		{% bootstrap_messages %}

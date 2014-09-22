@@ -113,7 +113,8 @@ class Contato(models.Model):
 class DocumentosPendentes(models.Model):
     aluno = models.OneToOneField(Pessoa, limit_choices_to={'tipo': Pessoa.ALUNO})
     documentos = models.CharField(max_length=255, verbose_name='Documentos pendentes')
-    outros = models.CharField(max_length=255, verbose_name='Outros', blank=True, default="")
+    outros = models.CharField(max_length=255, verbose_name='Outros', blank=True, default="",
+                              help_text="Por favor, use vírgula (,) como separador para definir multiplos documentos")
     class Meta:
         verbose_name = 'Documentos pendentes de aluno'
         verbose_name_plural = 'Documentos pendentes de aluno'

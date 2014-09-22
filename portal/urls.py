@@ -6,5 +6,6 @@ urlpatterns = patterns('portal.views',
     url(r'^access/$', 'access', name='access'),
     url(r'^logout/$', 'user_logout', name='logout'),
     url(r'^alterar_senha/$', 'alterar_senha', name='alterar_senha'),
-    url(r'^disciplinas/$', include('disciplina.urls')),
+    url(r'^disciplinas/', include('disciplina.urls')),
+    url(r'^perfil/', include('pessoa.urls')),
 )

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if documentos %}
+        <div class="panel panel-danger">
+            <div class="panel-heading">Documentos Pendentes</div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    {% for documento in documentos %}
+                        <li class="list-group-item list-group-item">{{documento}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
