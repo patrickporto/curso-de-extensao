@@ -61,7 +61,7 @@ class AvaliacaoTest(TestCase):
         self.aluno.save()
 
         self.disciplina = Disciplina()
-        self.disciplina.nome = ''
+        self.disciplina.nome = 'Português'
         self.disciplina.limite_faltas = 10
         self.disciplina.data_inicio = date(2014, 1, 19)
         self.disciplina.data_termino = date(2014, 5, 19)
@@ -71,7 +71,7 @@ class AvaliacaoTest(TestCase):
         self.disciplina.save()
 
     def test_create_nota(self):
-        avaliacoes_count = Avaliacao.objects.filter(disciplina=self.disciplina).count()
+        avaliacoes_count = Avaliacao.objects.count()
 
         self.assertEqual(avaliacoes_count, 1)
 
@@ -80,3 +80,18 @@ class AvaliacaoTest(TestCase):
         avaliacao.faltas = 6
         avaliacao.nota = 8
         avaliacao.save()
+
+    def test_create_nota_disciplinas_diferentes(self):
+        disciplina_2 = Disciplina()
+        disciplina_2.nome = 'Matemática'
+        disciplina_2.limite_faltas = 10
+        disciplina_2.data_inicio = date(2014, 1, 19)
+        disciplina_2.data_termino = date(2014, 5, 19)
+        disciplina_2.professor = self.professor
+        disciplina_2.save()
+        disciplina_2.aluno.add(self.aluno)
+        disciplina_2.save()
+
+        avaliacoes_count = Avaliacao.objects.count()
+
+        self.assertEqual(avaliacoes_count, 2)

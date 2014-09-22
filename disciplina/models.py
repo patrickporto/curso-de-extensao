@@ -72,7 +72,7 @@ class Avaliacao(models.Model):
 
 
 def disciplina_post_save(sender, instance, *args, **kwargs):
-    alunos_com_avaliacao = Avaliacao.objects.filter(aluno=instance.aluno.all).values('aluno__pk')
+    alunos_com_avaliacao = Avaliacao.objects.filter(aluno=instance.aluno.all, disciplina=instance).values('aluno__pk')
     alunos_sem_avaliacao = Pessoa.objects.filter(pk__in=instance.aluno.all).exclude(pk__in=alunos_com_avaliacao)
 
     for aluno in alunos_sem_avaliacao:
