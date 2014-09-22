@@ -1,50 +1,55 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="row-fluid">
-        <form method="get" class="form-inline" role="form">
-            <div class="form-group">
-                <label for="periodo">Período:</label>
-                <div class="input-group">
-                    <select name="periodo" id="periodo" class="form-control">
-                        {% for periodo in periodos %}
-                            <option value="{{ periodo.pk }}">{{ periodo.nome }}</option>
-                        {% endfor %}
-                    </select>
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-default btn-info"><span class="glyphicon glyphicon-search"></span> <span class="hidden-xs hidden-sm">Buscar</span></button>
-                    </span>
-                </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">Disciplinas e Avaliações</div>
+        <div class="panel-body">
+            <div class="row-fluid">
+                <form method="get" class="form-inline" role="form">
+                    <div class="form-group">
+                        <label for="periodo">Período:</label>
+                        <div class="input-group">
+                            <select name="periodo" id="periodo" class="form-control">
+                                {% for periodo in periodos %}
+                                    <option value="{{ periodo.pk }}">{{ periodo.nome }}</option>
+                                {% endfor %}
+                            </select>
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default btn-info"><span class="glyphicon glyphicon-search"></span> <span class="hidden-xs hidden-sm">Buscar</span></button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-    <br/>
-    <div class="row-fluid table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Disciplina</th>
-                    <th>Professor</th>
-                    <th class="text-center">Faltas</th>
-                    <th class="text-center">Nota</th>
-                    <th class="text-center">Situação</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for avaliacao in avaliacoes %}
-                    <tr>
-                        <td>{{ avaliacao.disciplina.nome }}</td>
-                        <td>{{ avaliacao.disciplina.professor.get_full_name }}</td>
-                        <td class="text-center">{{ avaliacao.faltas }}</td>
-                        <td class="text-center">{{ avaliacao.nota|default_if_none:"-----" }}</td>
-                        <td class="text-center">{{ avaliacao.get_situacao_display }}</td>
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="5" class="text-center">Nenhuma disciplina encontrada</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            <br/>
+            <div class="row-fluid table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>Professor</th>
+                            <th class="text-center">Faltas</th>
+                            <th class="text-center">Nota</th>
+                            <th class="text-center">Situação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for avaliacao in avaliacoes %}
+                            <tr>
+                                <td>{{ avaliacao.disciplina.nome }}</td>
+                                <td>{{ avaliacao.disciplina.professor.get_full_name }}</td>
+                                <td class="text-center">{{ avaliacao.faltas }}</td>
+                                <td class="text-center">{{ avaliacao.nota|default_if_none:"-----" }}</td>
+                                <td class="text-center">{{ avaliacao.get_situacao_display }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center">Nenhuma disciplina encontrada</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 {% endblock %}
