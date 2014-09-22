@@ -4,6 +4,7 @@
     <div class="panel panel-info">
         <div class="panel-heading">Disciplinas e Avaliações</div>
         <div class="panel-body">
+            {% if periodos %}
             <div class="row-fluid">
                 <form method="get" class="form-inline" role="form">
                     <div class="form-group">
@@ -11,7 +12,7 @@
                         <div class="input-group">
                             <select name="periodo" id="periodo" class="form-control">
                                 {% for periodo in periodos %}
-                                    <option value="{{ periodo.pk }}">{{ periodo.nome }}</option>
+                                    <option value="{{ periodo.pk }}" {% if periodo.pk == periodo_id %}selected{% endif %}>{{ periodo.nome }}</option>
                                 {% endfor %}
                             </select>
                             <span class="input-group-btn">
@@ -22,6 +23,7 @@
                 </form>
             </div>
             <br/>
+            {% endif %}
             <div class="row-fluid table-responsive">
                 <table class="table table-bordered table-striped">
                     <thead>
