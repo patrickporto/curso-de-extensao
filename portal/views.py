@@ -33,6 +33,7 @@ def access(request):
 
 def user_logout(request):
     logout(request)
+    messages.add_message(request, messages.WARNING, 'Você desconectou-se')
     return HttpResponseRedirect('/')
 
 
