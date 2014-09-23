@@ -6,7 +6,7 @@
         <div class="panel-body">
             <div class="list-group">
                 {% for arquivo in arquivos %}
-                    <a href="{{ arquivo.get_absolute_url }}" class="list-group-item">
+                    <a href="{{ arquivo.get_absolute_url }}" class="list-group-item" title="{{ arquivo.descricao }}">
                         <span class="badge">{{ arquivo.downloads }}</span>
                         {{ arquivo.nome }}
                     </a>
