@@ -121,3 +121,6 @@ AUTHENTICATION_BACKENDS += ('pessoa.backend.CustomBackend',)
 BUSINESS = {
     'media_aprovacao': 5,
 }
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
