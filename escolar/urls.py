@@ -4,6 +4,7 @@ from django.conf import settings
 
 urlpatterns = patterns('',
     url(r'', include('portal.urls')),
+    url(r'^arquivos/', include('downloads.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
 
