@@ -95,3 +95,9 @@ class AvaliacaoTest(TestCase):
         avaliacoes_count = Avaliacao.objects.count()
 
         self.assertEqual(avaliacoes_count, 2)
+
+    def test_autoremove_nota(self):
+        self.disciplina.aluno.remove(self.aluno)
+        self.disciplina.save()
+
+        self.assertEqual(Avaliacao.objects.count(), 0)
