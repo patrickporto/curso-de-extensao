@@ -11,6 +11,7 @@
                         <label for="periodo">Período:</label>
                         <div class="input-group">
                             <select name="periodo" id="periodo" class="form-control">
+                                <option value="0">Todos</option>
                                 {% for periodo in periodos %}
                                     <option value="{{ periodo.pk }}" {% if periodo.pk == periodo_id %}selected{% endif %}>{{ periodo.nome }}</option>
                                 {% endfor %}

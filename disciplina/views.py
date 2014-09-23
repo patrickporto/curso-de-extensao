@@ -12,8 +12,6 @@ def disciplinas(request):
     periodos = Periodo.objects.filter(pk__in=avaliacoes.values('disciplina__periodo').distinct())
     if periodo_id:
         avaliacoes = avaliacoes.filter(disciplina__periodo__id=periodo_id)
-    else:
-        avaliacoes = avaliacoes.filter(disciplina__periodo=periodos.last())
     if avaliacoes.count() == 0 and periodo_id:
         messages.add_message(request, messages.ERROR, 'O período informado não existe')
 
