@@ -7,7 +7,7 @@ class ArquivoQuerySet(models.QuerySet):
     def pesquisa(self, query):
         if not query:
             return self
-        return self.filter(Q(nome__contains=query) | Q(descricao__contains=query))
+        return self.filter(Q(nome__icontains=query) | Q(descricao__icontains=query))
 
 
 
