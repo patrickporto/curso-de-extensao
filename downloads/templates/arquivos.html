@@ -7,8 +7,9 @@
             <div class="list-group">
                 {% for arquivo in arquivos %}
                     <a href="{{ arquivo.get_absolute_url }}" class="list-group-item" title="{{ arquivo.descricao }}">
-                        <span class="badge">{{ arquivo.downloads }}</span>
+                        <span class="glyphicon glyphicon-file"></span>
                         {{ arquivo.nome }}
+                        <span class="badge">{{ arquivo.downloads }}</span>
                     </a>
                 {% empty %}
                     <div class="alert alert-info">Não há arquivos disponíveis no momento</div>
