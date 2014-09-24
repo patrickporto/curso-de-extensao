@@ -12,12 +12,14 @@ def download(request, slug):
     return response
 
 def arquivos(request):
-    paginator = Paginator(Arquivo.objects.all(), 25)
-
     page = request.GET.get('page', 1)
+    q = request.GET.get('q', '')
+
+    qs = Arquivo.objects.pesquisa(q)
+    paginator = Paginator(qs, 25)
     try:
         lista_arquivos = paginator.page(page)
     except EmptyPage:
         lista_arquivos = paginator.page(paginator.num_pages)
 
-    return render(request, 'arquivos.html', {'arquivos': lista_arquivos})
+    return render(request, 'arquivos.html', {'arquivos': lista_arquivos, 'q': q})

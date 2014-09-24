@@ -1,6 +1,14 @@
 from django.db import models
+from django.db.models import Q
 from autoslug import AutoSlugField
 from django.core.urlresolvers import reverse
+
+class ArquivoQuerySet(models.QuerySet):
+    def pesquisa(self, query):
+        if not query:
+            return self
+        return self.filter(Q(nome__contains=query) | Q(descricao__contains=query))
+
 
 
 class Arquivo(models.Model):
@@ -9,6 +17,8 @@ class Arquivo(models.Model):
     descricao = models.TextField(verbose_name='Descrição', blank=True)
     arquivo = models.FileField()
     downloads = models.IntegerField(verbose_name='Quantidade de downloads realizados', default=0)
+
+    objects = ArquivoQuerySet.as_manager()
 
     def __str__(self):
         return self.nome
