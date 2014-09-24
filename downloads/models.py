@@ -25,3 +25,20 @@ class Arquivo(models.Model):
 
     def get_absolute_url(self):
         return reverse('download', kwargs={'slug': self.slug})
+
+    def registre(self, pessoa, ip):
+        if pessoa.is_anonymous():
+            usuario = 'Anônimo'
+        else:
+            usuario = str(pessoa)
+        ArquivoHistorico.objects.create(usuario=usuario, arquivo=self, ip=ip)
+
+
+class ArquivoHistorico(models.Model):
+    data = models.DateTimeField(auto_now_add=True, verbose_name="Data da Ação")
+    arquivo = models.ForeignKey(Arquivo, verbose_name='Arquivo')
+    ip = models.IPAddressField(verbose_name='Endereço IP')
+    usuario = models.CharField(max_length=255, verbose_name="Usuário")
+
+    def __str__(self):
+        return "[{2}][{0}] {1}: {3}".format(self.data, self.arquivo, self.ip, self.usuario)
