@@ -1,5 +1,5 @@
 var updateHistory = function(slug, page) {
-    if (page === undefined) page = 1
+    if (page === undefined) page = 1;
     var arqHistory = $('.file-history'),
         pager = $('.history-pager'),
         pageNext = $('.history-next'),
@@ -40,9 +40,11 @@ var arquivoModal = function() {
     var $that = $(this),
         arqNome = $('.file-nome'),
         arqDescricao = $('.file-descricao'),
-        arqDownloads = $('.file-downloads');
+        arqDownloads = $('.file-downloads'),
+        arqHistory = $('.file-history');
     arqDescricao.html('');
     arqDownloads.html('');
+    arqHistory.html('');
 
     $('#modal-arquivo').modal('show');
 
