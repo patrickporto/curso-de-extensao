@@ -72,7 +72,7 @@ class Avaliacao(models.Model):
 
 
 def disciplina_post_save(sender, instance, action, *args, **kwargs):
-    if action == 'post_add' or action == 'post_remove':
+    if action in ['post_add', 'post_remove', 'post_clear']:
         Avaliacao.objects.filter(disciplina=instance).exclude(aluno=instance.aluno.all).delete()
 
         for aluno in instance.aluno.all():
