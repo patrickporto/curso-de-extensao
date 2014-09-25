@@ -1,0 +1,39 @@
+<div class="modal fade" tabindex="-1" id="modal-arquivo" role="dialog" aria-labelledby="Arquivo" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><span class="file-nome"></span></h4>
+            </div>
+            <div class="modal-body">
+
+                <ul class="nav nav-tabs nav-justified" role="tablist">
+                    <li class="active"><a href="#content-info" role="tab" data-toggle="tab">Informações</a></li>
+                    {% if request.user.is_staff %}
+                        <li><a href="#content-history" role="tab" data-toggle="tab">Histórico</a></li>
+                    {% endif %}
+                </ul>
+                <br/>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="content-info">
+                        <p><strong>Quantidade de Downloads: </strong><span class="file-downloads"></span></p>
+                        <p><strong>Descrição: </strong> <span class="file-descricao"></span></p>
+                    </div>
+                    {% if request.user.is_staff %}
+                        <div class="tab-pane" id="content-history">
+                            <ul class="list-group file-history"></ul>
+                            <ul class="pager history-pager">
+                                <li><a href="#" class="history-previous">&larr; Anterior</a></li>
+                                <li><a href="#"><span class="history-page"></span>/<span class="history-maxpages"></span></a></li>
+                                <li><a href="#" class="history-next">Próximo &rarr;</a></li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <a href="#" class="btn btn-primary" id="download">Download</a>
+            </div>
+        </div>
+    </div>
+</div>
