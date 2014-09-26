@@ -14,7 +14,7 @@ atualizar_situacao.short_description = "Atualizar situação dos alunos selecion
 
 @admin.register(Disciplina)
 class DisciplinaAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'limite_faltas', )
+    list_display = ('nome', 'limite_faltas', 'quant_alunos',)
     list_display_links = ('nome',)
     search_fields = ('nome', 'professor__nome', 'professor__sobrenome',)
     readonly_fields = ('data_criacao', 'data_atualizacao',)

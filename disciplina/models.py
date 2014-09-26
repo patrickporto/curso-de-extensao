@@ -45,6 +45,10 @@ class Disciplina(models.Model):
     def __str__(self):
         return self.nome
 
+    def quant_alunos(self):
+        return len(self.aluno.all())
+    quant_alunos.short_description = "Quantidade de alunos"
+
 
 class Avaliacao(models.Model):
     CURSANDO = 'cursando'
