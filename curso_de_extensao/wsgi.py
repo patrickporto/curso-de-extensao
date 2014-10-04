@@ -1,5 +1,5 @@
 """
-WSGI config for escolar project.
+WSGI config for curso_de_extensao project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/
 """
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "escolar.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "curso_de_extensao.settings")
 
 try:
     import pymysql

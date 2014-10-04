@@ -1,5 +1,5 @@
 """
-Django settings for escolar project.
+Django settings for curso_de_extensao project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -67,9 +67,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'escolar.urls'
+ROOT_URLCONF = 'curso_de_extensao.urls'
 
-WSGI_APPLICATION = 'escolar.wsgi.application'
+WSGI_APPLICATION = 'curso_de_extensao.wsgi.application'
 
 
 # Database
