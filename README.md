@@ -1,8 +1,8 @@
 ### Introdução
 Este projeto foi projetado usando as tecnologias mais recentes do
-mercado. Segue os pré-requisitos:
-* Python 3.3 (recomendado Python 3.4)
-* MySQL 5.6 ou superior
+mercado. Segue os pré-requisitos:  
+* Python 3.3 (recomendado Python 3.4)  
+* MySQL 5.6 ou superior  
 ### Instalação de pacotes no sistema
 ```shell
 $ sudo apt-get install $(cat packages.txt)
