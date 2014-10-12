@@ -33,7 +33,7 @@ $ python2 manage.py runserver  # Executa a aplicação no servidor de desenvolvi
 ### Deploy para o ambiente de produção ###
 Para realizar deploy em um ambiente novo, execute o seguinte comando:
 ```shell
-$ fab <ambiente> deploy:setup=True
+$ fab prod deploy:setup=True
 ```
 > O arquivo fabfile/environments.py é o módulo responsável pela configuração
 > de ambientes. Neste módulo é onde fica o host, user e endereço da key de 
@@ -43,5 +43,5 @@ $ fab <ambiente> deploy:setup=True
 
 Caso o deploy seja em um ambiente já configurado, execute o seguinte comando:
 ```shell
-$ fab <ambiente> deploy
+$ fab prod deploy
 ```
