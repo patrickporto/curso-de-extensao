@@ -14,7 +14,7 @@ from fabric.context_managers import (
 
 rm = lambda path: run('rm -rf {0}'.format(path))
 mkdir = lambda dirname: run('mkdir -p {0}'.format(dirname))
-pkg_install = lambda name: run('apt-get install -y'.format(name))
+pkg_install = lambda name: run('apt-get install -y {0}'.format(name))
 
 
 def deploy(setup=False):
@@ -26,7 +26,6 @@ def deploy(setup=False):
         __update()
         __create_structure()
         __upload()
-        __install_git()
         __install_packages()
         __settings_gunicorn()
         __settings_nginx()
@@ -50,13 +49,6 @@ def __create_structure():
     mkdir('/opt/static')
     # Criação da pasta dos medias
     mkdir('/opt/media')
-
-
-def __install_git():
-    """
-    Instalação do git
-    """
-    run('apt-get install git')
 
 
 def __upload():
