@@ -31,6 +31,10 @@ $ python2 manage.py migrate    # Cria o banco de dados e todas as tabelas
 $ python2 manage.py runserver  # Executa a aplicação no servidor de desenvolvimento
 ```
 ### Deploy para o ambiente de produção ###
+Mude a permissão da chave de deploy:
+```shell
+$ chmod 644 fabfile/deploy
+```
 Para realizar deploy em um ambiente novo, execute o seguinte comando:
 ```shell
 $ fab prod deploy:setup=True
