@@ -22,7 +22,7 @@ def deploy(setup=False):
     Realizar deploy de uma versão da aplicação para o ambiente
     >> fab prod deploy:tag=master,setup=True
     """
-    if setup:
+    if setup.lower() == 's':
         __update()
         __create_structure()
         __upload()
