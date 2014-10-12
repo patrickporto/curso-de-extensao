@@ -16,7 +16,7 @@ $ sudo apt-get install $(cat packages.txt)
 ```shell
 $ pip2 install -r requirements.txt
 ```
-## Configuração do branco ##
+## Configuração do banco de dados ##
 ```shell
 $ mysqladmin -u root -p 
 mysql> CREATE DATABASE cursodeextensao;
@@ -29,4 +29,19 @@ mysql> exit;
 ```shell
 $ python2 manage.py migrate    # Cria o banco de dados e todas as tabelas
 $ python2 manage.py runserver  # Executa a aplicação no servidor de desenvolvimento
+```
+### Deploy para o ambiente de produção ###
+Para realizar deploy em um ambiente novo, execute o seguinte comando:
+```shell
+$ fab <ambiente> deploy:setup=True
+```
+> O arquivo fabfile/environments.py é o módulo responsável pela configuração
+> de ambientes. Neste módulo é onde fica o host, user e endereço da key de 
+> deploy, havendo possibilidade de acrescentar a senha de acesso.
+> Para mais informações: 
+> http://docs.fabfile.org/en/1.10/usage/env.html#environment-as-configuration
+
+Caso o deploy seja em um ambiente já configurado, execute o seguinte comando:
+```shell
+$ fab <ambiente> deploy
 ```

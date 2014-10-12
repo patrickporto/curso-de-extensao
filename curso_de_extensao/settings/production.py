@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-from escolar.settings import *
+from curso_de_extensao.settings import *
 
 ALLOWED_HOSTS = ('104.131.39.168',)
 
