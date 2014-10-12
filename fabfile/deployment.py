@@ -17,7 +17,7 @@ mkdir = lambda dirname: run('mkdir -p {0}'.format(dirname))
 pkg_install = lambda name: run('apt-get install -y {0}'.format(name))
 
 
-def deploy(setup=False):
+def deploy(setup='n'):
     """
     Realizar deploy de uma versão da aplicação para o ambiente
     >> fab prod deploy:tag=master,setup=True
