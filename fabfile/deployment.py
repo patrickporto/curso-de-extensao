@@ -29,7 +29,7 @@ def deploy(setup=False):
         __install_git()
         __install_packages()
         __settings_gunicorn()
-        __install_nginx()
+        __settings_nginx()
         __install_virtualenv()
     else:
         __upload()
@@ -95,12 +95,11 @@ def __update():
     run('apt-get update')
 
 
-def __install_nginx():
+def __settings_nginx():
     """
     Instalação do nginx
     """
     with cd('/opt/app/'):
-        pkg_install('nginx')
         rm('/etc/nginx/sites-enabled/*')
         run('ln -f ./curso_de_extensao/nginx.conf /etc/nginx/sites-enabled/django')
 
