@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from pessoa.models import Pessoa
 
 

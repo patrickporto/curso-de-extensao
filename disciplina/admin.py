@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.contrib import admin
 from disciplina.models import Disciplina, Avaliacao, Periodo
 from disciplina.forms import DisciplinaForm
@@ -37,7 +38,7 @@ class AvaliacaoAdmin(admin.ModelAdmin):
         return False
 
     def get_actions(self, request):
-        actions = super().get_actions(request)
+        actions = super(AvaliacaoAdmin, self).get_actions(request)
         del actions['delete_selected']
         return actions
 

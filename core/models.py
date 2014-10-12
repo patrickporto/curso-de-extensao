@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 FOTOS = 1
 CURRICULO = 2
 HISTORICO_SUPERIOR = 3

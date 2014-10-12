@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.contrib import admin
 from downloads.models import Arquivo, ArquivoHistorico
 
@@ -18,6 +19,6 @@ class ArquivoHistoricoAdmin(admin.ModelAdmin):
         return False
 
     def get_actions(self, request):
-        actions = super().get_actions(request)
+        actions = super(ArquivoHistoricoAdmin, self).get_actions(request)
         del actions['delete_selected']
         return actions

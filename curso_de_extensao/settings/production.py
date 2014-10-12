@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from escolar.settings import *
 
 ALLOWED_HOSTS = ('104.131.39.168',)

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.test import TestCase
 from pessoa.models import Pessoa
 from disciplina.models import Disciplina, Avaliacao, Periodo

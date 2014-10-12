@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.db import models
 from django.db.models import Q
 from autoslug import AutoSlugField

@@ -20,7 +20,7 @@ class PessoaChangeForm(forms.ModelForm):
 class PessoaCreationForm(PessoaChangeForm):
 
     def save(self, commit=True):
-        user = super().save(commit)
+        user = super(PessoaCreationForm, self).save(commit)
         user.set_password(self.cleaned_data['data_nascimento'].strftime('%d%m%Y'))
         if commit:
             user.save()

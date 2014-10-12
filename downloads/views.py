@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator, EmptyPage
