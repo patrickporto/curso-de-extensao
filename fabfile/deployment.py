@@ -68,7 +68,8 @@ def __install_packages():
     """
     Instalação dos pacotes para o sistema
     """
-    pkg_install('$(cat packages.txt)')
+    with cd('/opt/app/'):
+        pkg_install('$(cat packages.txt)')
 
 
 def __install_dependencies():
