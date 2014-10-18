@@ -1,7 +1,9 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 from django.test import TestCase
 from datetime import date
 from pessoa.models import Pessoa, Contato
+
 
 class PessoaTest(TestCase):
 
@@ -13,12 +15,12 @@ class PessoaTest(TestCase):
         pessoa.cpf = '111.111.111-11'
         pessoa.tipo = Pessoa.FUNCIONARIO
         pessoa.save()
-        contato_1 = Contato.objects.create(
+        Contato.objects.create(
             tipo=Contato.TELEFONE,
             descricao='(00)0000-0000',
             pessoa=pessoa
         )
-        contato_2 = Contato.objects.create(
+        Contato.objects.create(
             tipo=Contato.EMAIL,
             descricao='fulano@email.com',
             pessoa=pessoa
@@ -32,12 +34,12 @@ class PessoaTest(TestCase):
         aluno.cpf = '222.222.222-22'
         aluno.tipo = Pessoa.FUNCIONARIO
         aluno.save()
-        contato_1 = Contato.objects.create(
+        Contato.objects.create(
             tipo=Contato.TELEFONE,
             descricao='(00)0000-0000',
             pessoa=aluno
         )
-        contato_2 = Contato.objects.create(
+        Contato.objects.create(
             tipo=Contato.EMAIL,
             descricao='fulano@email.com',
             pessoa=aluno
@@ -51,12 +53,12 @@ class PessoaTest(TestCase):
         professor.cpf = '333.333.333-33'
         professor.tipo = Pessoa.PROFESSOR
         professor.save()
-        contato_1 = Contato.objects.create(
+        Contato.objects.create(
             tipo=Contato.TELEFONE,
             descricao='(00)0000-0000',
             pessoa=professor
         )
-        contato_2 = Contato.objects.create(
+        Contato.objects.create(
             tipo=Contato.EMAIL,
             descricao='fulano@email.com',
             pessoa=professor

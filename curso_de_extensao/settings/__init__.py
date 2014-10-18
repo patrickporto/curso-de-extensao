@@ -14,7 +14,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 ADMIN = (
-    ('Patrick Porto', 'patrick.s.porto@gmail.com',),
+    ('Igor Canedo', 'igor.canedo@corp.globo.com',),
 )
 
 # Quick-start development settings - unsuitable for production
@@ -105,7 +105,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,  'templates'),
+    os.path.join(BASE_DIR, 'templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS += (

@@ -1,11 +1,14 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
+import json
+
 from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator, EmptyPage
 from django.core.serializers import serialize
 from django.contrib.auth.decorators import user_passes_test, login_required
 from downloads.models import Arquivo, ArquivoHistorico
-import json
+
 
 def _get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -39,6 +42,7 @@ def arquivos(request):
 
     return render(request, 'arquivos.html', {'arquivos': lista_arquivos, 'q': q})
 
+
 @login_required
 def info(request, slug):
     arquivo = get_object_or_404(Arquivo, slug=slug)
@@ -46,6 +50,7 @@ def info(request, slug):
     formatted = obj_to_json([arquivo])[0]
     formatted['url'] = arquivo.get_absolute_url()
     return JsonResponse(formatted, safe=False)
+
 
 @user_passes_test(lambda u: u.tipo == u.FUNCIONARIO)
 def history(request, slug):

@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 from django.contrib import admin
 from disciplina.models import Disciplina, Avaliacao, Periodo
 from disciplina.forms import DisciplinaForm

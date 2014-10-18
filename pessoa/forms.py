@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 from django import forms
 from pessoa.models import Pessoa, DocumentosPendentes
 from localflavor.br.forms import BRCPFField
@@ -11,7 +12,6 @@ class PessoaChangeForm(forms.ModelForm):
     class Meta:
         model = Pessoa
         fields = ('nome', 'sobrenome', 'data_nascimento', 'cpf', 'is_active', 'tipo',)
-
 
     def clean_password(self):
         return self.initial['password']
@@ -33,4 +33,4 @@ class DocumentosPendentesForm(forms.ModelForm):
 
     class Meta:
         model = DocumentosPendentes
-        fields = ('documentos','outros')
+        fields = ('documentos', 'outros')

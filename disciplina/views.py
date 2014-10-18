@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages

@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils.translation import ugettext as _
@@ -75,7 +76,6 @@ class Pessoa(AbstractBaseUser):
     def is_staff(self):
         return self.is_superuser
 
-
     objects = CustomUserManager()
 
     def get_full_name(self):
@@ -115,6 +115,7 @@ class DocumentosPendentes(models.Model):
     documentos = models.CharField(max_length=255, verbose_name='Documentos pendentes')
     outros = models.CharField(max_length=255, verbose_name='Outros', blank=True, default="",
                               help_text="Por favor, use vírgula (,) como separador para definir multiplos documentos")
+
     class Meta:
         verbose_name = 'Documentos pendentes de aluno'
         verbose_name_plural = 'Documentos pendentes de aluno'

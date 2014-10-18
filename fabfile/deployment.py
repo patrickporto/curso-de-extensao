@@ -1,8 +1,8 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 from fabric.api import (
     env,
     run,
-    local,
     prefix,
 )
 from fabric.contrib.project import rsync_project
@@ -32,7 +32,7 @@ def deploy(setup='n'):
         __install_virtualenv()
     else:
         __upload()
-    with prefix('source /opt/env/bin/activate'),shell_env(DJANGO_SETTINGS_MODULE=env.DJANGO_SETTINGS):
+    with prefix('source /opt/env/bin/activate'), shell_env(DJANGO_SETTINGS_MODULE=env.DJANGO_SETTINGS):
         __install_dependencies()
         __migrate()
         __collecstatic()
@@ -78,7 +78,6 @@ def __install_dependencies():
     """
     with cd('/opt/app/'):
         run('pip install -r requirements.txt')
-
 
 
 def __update():
@@ -138,4 +137,3 @@ def __install_virtualenv():
     """
     run('pip install virtualenv')
     run('virtualenv /opt/env')
-

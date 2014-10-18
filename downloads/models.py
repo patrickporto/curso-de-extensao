@@ -1,15 +1,16 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from django.db.models import Q
 from autoslug import AutoSlugField
 from django.core.urlresolvers import reverse
+
 
 class ArquivoQuerySet(models.QuerySet):
     def pesquisa(self, query):
         if not query:
             return self
         return self.filter(Q(nome__icontains=query) | Q(descricao__icontains=query))
-
 
 
 class Arquivo(models.Model):

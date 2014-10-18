@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from pessoa.models import Pessoa
 from django.utils import timezone
@@ -8,10 +9,11 @@ from django.conf import settings
 class AvaliacaoQuerySet(models.QuerySet):
     def aprovados(self):
         return self.filter(nota__gte=settings.BUSINESS['media_aprovacao'],
-                                                faltas__lte=models.F('disciplina__limite_faltas'))
+                           faltas__lte=models.F('disciplina__limite_faltas'))
+
     def reprovados(self):
         return self.filter(models.Q(nota__lt=settings.BUSINESS['media_aprovacao']) |
-                                                models.Q(faltas__gt=models.F('disciplina__limite_faltas')))
+                           models.Q(faltas__gt=models.F('disciplina__limite_faltas')))
 
 
 class AvaliacaoManager(models.Manager):
@@ -23,6 +25,7 @@ class AvaliacaoManager(models.Manager):
 
     def reprovados(self):
         return self.get_queryset().reprovados()
+
 
 class Periodo(models.Model):
     nome = models.CharField(max_length=255, verbose_name="Período")

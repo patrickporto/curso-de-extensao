@@ -1,8 +1,6 @@
 ### Introdução ###
-Este projeto foi projetado usando as tecnologias mais recentes do
-mercado. Segue os pré-requisitos:  
-* Python 3.3 (recomendado Python 3.4)  
-* MySQL 5.6 ou superior  
+* Python 2.7
+* MySQL 5.5 ou superior
 ### Configuração de ambiente local ###
 ## Instalação de pacotes no sistema ##
 ```shell
@@ -18,7 +16,7 @@ $ pip2 install -r requirements.txt
 ```
 ## Configuração do banco de dados ##
 ```shell
-$ mysqladmin -u root -p 
+$ mysqladmin -u root -p
 mysql> CREATE DATABASE cursodeextensao;
 mysql> CREATE USER 'escola'@'localhost' IDENTIFIED BY '#!Q@W#E$R';
 mysql> GRANT ALL PRIVILEGES ON cursodeextensao.* TO 'escola'@'localhost';
@@ -40,9 +38,9 @@ Para realizar deploy em um ambiente novo, execute o seguinte comando:
 $ fab prod deploy:setup=S
 ```
 > O arquivo fabfile/environments.py é o módulo responsável pela configuração
-> de ambientes. Neste módulo é onde fica o host, user e endereço da key de 
+> de ambientes. Neste módulo é onde fica o host, user e endereço da key de
 > deploy, havendo possibilidade de acrescentar a senha de acesso.
-> Para mais informações: 
+> Para mais informações:
 > http://docs.fabfile.org/en/1.10/usage/env.html#environment-as-configuration
 
 Caso o deploy seja em um ambiente já configurado, execute o seguinte comando:
