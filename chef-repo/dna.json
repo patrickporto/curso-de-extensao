@@ -1,0 +1,14 @@
+{
+  "run_list": [
+    "recipe[apt]",
+    "recipe[build-essential]",
+    "recipe[python]",
+    "recipe[libpq-dev]",
+    "recipe[ohai]",
+    "recipe[yum]",
+    "recipe[mysql::server]",
+    "recipe[mysql::client]",
+    "recipe[nginx]",
+    "recipe[gunicorn]",
+  ]
+}

@@ -6,12 +6,15 @@ ALLOWED_HOSTS = ('104.131.39.168',)
 
 DEBUG = True
 
+DB_USER = 'cursodeextensao'
+DB_PASSWORD = '#!Q@W#E$R'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cursodeextensao',
-        'USER': 'escola',
-        'PASSWORD': '#!Q@W#E$R',
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
     }
 }
 

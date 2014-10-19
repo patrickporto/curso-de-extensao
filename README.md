@@ -35,7 +35,7 @@ $ chmod 644 fabfile/deploy
 ```
 Para realizar deploy em um ambiente novo, execute o seguinte comando:
 ```shell
-$ fab prod deploy:setup=S
+$ fab prod deploy:setup=True
 ```
 > O arquivo fabfile/environments.py é o módulo responsável pela configuração
 > de ambientes. Neste módulo é onde fica o host, user e endereço da key de
