@@ -1,7 +1,6 @@
 ## Introdução ##
 * Python 2.7
 * MySQL 5.5 ou superior
-### Configuração de ambiente local ###
 #### Instalação de pacotes no sistema ####
 ```shell
 $ sudo apt-get install $(cat packages.txt)

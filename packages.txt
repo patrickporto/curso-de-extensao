@@ -1,1 +1,0 @@
-build-essential libpq-dev python-dev python-setuptools python-pip libmysqlclient-dev mysql-client mysql-server nginx

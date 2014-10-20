@@ -8,7 +8,6 @@
     "recipe[yum]",
     "recipe[mysql::server]",
     "recipe[mysql::client]",
-    "recipe[nginx]",
-    "recipe[gunicorn]",
+    "recipe[nginx]"
   ]
 }
