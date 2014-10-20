@@ -9,7 +9,7 @@ DEBUG = False
 
 DB_NAME = 'cursodeextensao'
 DB_USER = 'cursodeextensao'
-DB_PASSWORD = '#!Q@W#ER'
+DB_PASSWORD = 'ilikerandompasswords'
 
 DATABASES = {
     'default': {

@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'curso_de_extensao.wsgi.application'
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 DB_USER = 'cursodeextensao'
-DB_PASSWORD = '#!Q@W#E$R'
+DB_PASSWORD = 'ilikerandompasswords'
 
 DATABASES = {
     'default': {
