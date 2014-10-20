@@ -29,7 +29,6 @@ def deploy(setup=False):
         __install_dependencies()
         __migrate()
         __collecstatic()
-        # print ''
     __restart_services()
 
 
