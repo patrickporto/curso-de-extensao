@@ -71,7 +71,7 @@ class Avaliacao(models.Model):
     objects = AvaliacaoManager()
 
     def __str__(self):
-        return "{0} - {1}".format(self.aluno, self.disciplina)
+        return u'{0} - {1}'.format(self.aluno, self.disciplina)
 
     class Meta:
         verbose_name = "Avaliação"

@@ -25,7 +25,7 @@ def download(request, slug):
     arquivo.save()
     arquivo.registre(request.user, _get_client_ip(request))
     response = HttpResponse(arquivo.arquivo)
-    response['Content-Disposition'] = 'attachment; filename={0}'.format(arquivo.arquivo.name[2:])
+    response['Content-Disposition'] = u'attachment; filename={0}'.format(arquivo.arquivo.name[2:])
     return response
 
 

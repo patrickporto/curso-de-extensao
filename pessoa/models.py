@@ -79,7 +79,7 @@ class Pessoa(AbstractBaseUser):
     objects = CustomUserManager()
 
     def get_full_name(self):
-        return "{0} {1}".format(self.nome, self.sobrenome)
+        return u'{0} {1}'.format(self.nome, self.sobrenome)
 
     get_full_name.short_description = 'Nome completo'
 
@@ -89,7 +89,7 @@ class Pessoa(AbstractBaseUser):
     def __str__(self):
         if self.tipo == self.FUNCIONARIO:
             return self.get_full_name()
-        return "{0} - {1}".format(self.get_full_name(), self.cpf)
+        return u'{0} - {1}'.format(self.get_full_name(), self.cpf)
 
     class Meta:
         verbose_name = 'Pessoa'
@@ -107,7 +107,7 @@ class Contato(models.Model):
     pessoa = models.ForeignKey(Pessoa)
 
     def __str__(self):
-        return "{0} - {1}".format(dict(self.CHOICES_TIPO_CONTATO)[self.tipo], self.descricao)
+        return u'{0} - {1}'.format(dict(self.CHOICES_TIPO_CONTATO)[self.tipo], self.descricao)
 
 
 class DocumentosPendentes(models.Model):

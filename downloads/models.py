@@ -43,7 +43,7 @@ class ArquivoHistorico(models.Model):
     usuario = models.CharField(max_length=255, verbose_name="Usuário")
 
     def __str__(self):
-        return "[{2}][{0}] {1}: {3}".format(self.data, self.arquivo, self.ip, self.usuario)
+        return u'[{2}][{0}] {1}: {3}'.format(self.data, self.arquivo, self.ip, self.usuario)
 
     class Meta:
         verbose_name = 'Histórico de Downloads'

@@ -19,5 +19,5 @@ def item(request, name, *args):
 
     if current_url == info['link']:
         info['class'] = 'active'
-    output = "<li class=\"{class}\"><a href=\"{link}\">{name}</a></li>".format(**info)
+    output = u'<li class=\"{class}\"><a href=\"{link}\">{name}</a></li>'.format(**info)
     return output
