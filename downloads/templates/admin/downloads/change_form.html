@@ -1,0 +1,10 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrastyle %}
+{{ block.super }}
+
+<style type="text/css">
+    .submit-row input:nth-child(n+2) {display: none}
+</style>
+
+{% endblock %}

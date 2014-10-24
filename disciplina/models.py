@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from django.db import models
-from pessoa.models import Pessoa
-from django.utils import timezone
 from django.conf import settings
+from django.db import models
+from django.utils import timezone
+from pessoa.models import Pessoa
 
 
 class AvaliacaoQuerySet(models.QuerySet):
@@ -32,7 +32,7 @@ class Periodo(models.Model):
     data_inicio = models.DateField(verbose_name='Data de início', default=timezone.now)
     data_termino = models.DateField(verbose_name='Data de término', default=timezone.now)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
 
@@ -45,7 +45,7 @@ class Disciplina(models.Model):
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação', default=timezone.now)
     data_atualizacao = models.DateTimeField(auto_now=True, verbose_name='Data de atualização', default=timezone.now)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     def quant_alunos(self):
@@ -70,7 +70,7 @@ class Avaliacao(models.Model):
 
     objects = AvaliacaoManager()
 
-    def __str__(self):
+    def __unicode__(self):
         return u'{0} - {1}'.format(self.aluno, self.disciplina)
 
     class Meta:

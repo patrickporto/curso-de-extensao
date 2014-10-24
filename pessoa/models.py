@@ -62,6 +62,8 @@ class Pessoa(AbstractBaseUser):
 
     is_active = models.BooleanField(default=True, verbose_name='Ativo')
 
+    objects = CustomUserManager()
+
     def has_perm(self, perm, obj=None):
         return True
 
@@ -76,8 +78,6 @@ class Pessoa(AbstractBaseUser):
     def is_staff(self):
         return self.is_superuser
 
-    objects = CustomUserManager()
-
     def get_full_name(self):
         return u'{0} {1}'.format(self.nome, self.sobrenome)
 
@@ -86,7 +86,7 @@ class Pessoa(AbstractBaseUser):
     def get_short_name(self):
         return self.nome
 
-    def __str__(self):
+    def __unicode__(self):
         if self.tipo == self.FUNCIONARIO:
             return self.get_full_name()
         return u'{0} - {1}'.format(self.get_full_name(), self.cpf)
@@ -106,7 +106,7 @@ class Contato(models.Model):
     descricao = models.CharField(max_length=255, verbose_name='Descrição')
     pessoa = models.ForeignKey(Pessoa)
 
-    def __str__(self):
+    def __unicode__(self):
         return u'{0} - {1}'.format(dict(self.CHOICES_TIPO_CONTATO)[self.tipo], self.descricao)
 
 
@@ -120,5 +120,5 @@ class DocumentosPendentes(models.Model):
         verbose_name = 'Documentos pendentes de aluno'
         verbose_name_plural = 'Documentos pendentes de aluno'
 
-    def __str__(self):
+    def __unicode__(self):
         return self.aluno.get_full_name()

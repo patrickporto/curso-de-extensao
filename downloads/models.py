@@ -22,7 +22,7 @@ class Arquivo(models.Model):
 
     objects = ArquivoQuerySet.as_manager()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
 
     def get_absolute_url(self):
@@ -42,7 +42,7 @@ class ArquivoHistorico(models.Model):
     ip = models.IPAddressField(verbose_name='Endereço IP')
     usuario = models.CharField(max_length=255, verbose_name="Usuário")
 
-    def __str__(self):
+    def __unicode__(self):
         return u'[{2}][{0}] {1}: {3}'.format(self.data, self.arquivo, self.ip, self.usuario)
 
     class Meta:

@@ -1,0 +1,13 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrastyle %}
+{{ block.super }}
+
+<style type="text/css">
+    .datetimeshortcuts {margin-left: -3px}
+    .datetimeshortcuts a:first-child {display: none}
+    .deletelink-box {display: none}
+    .submit-row input:nth-child(n+2) {display: none}
+</style>
+
+{% endblock %}
