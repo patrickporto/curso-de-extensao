@@ -42,6 +42,7 @@ def __create_structure():
     mkdir('/opt/static')
     # Criação da pasta dos medias
     mkdir('/opt/media')
+    run('chmod 777 /opt/media')
 
 
 def __upload():
