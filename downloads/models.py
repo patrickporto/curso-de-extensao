@@ -1,9 +1,24 @@
 # -*- coding: utf-8 -*-
 
+import unicodedata
 from django.db import models
 from django.db.models import Q
 from autoslug import AutoSlugField
 from django.core.urlresolvers import reverse
+
+
+class NewFileField(models.FileField):
+
+    def __init__(self, *args, **kwargs):
+        super(NewFileField, self).__init__(*args, **kwargs)
+
+    def clean(self, *args, **kwargs):
+        data = super(NewFileField, self).clean(*args, **kwargs)
+        if isinstance(data.name, unicode):
+            data.name = unicodedata.normalize('NFKD', data.name).encode('ascii', 'ignore').lower()
+        else:
+            data.name = unicodedata.normalize('NFKD', unicode(data.name, 'UTF-8')).encode('ascii', 'ignore').lower()
+        return data
 
 
 class ArquivoQuerySet(models.QuerySet):
@@ -17,7 +32,7 @@ class Arquivo(models.Model):
     nome = models.CharField(max_length=255, verbose_name='Nome')
     slug = AutoSlugField(populate_from='nome', unique=True)
     descricao = models.TextField(verbose_name='Descrição', blank=True)
-    arquivo = models.FileField()
+    arquivo = NewFileField()
     downloads = models.IntegerField(verbose_name='Quantidade de downloads realizados', default=0)
 
     objects = ArquivoQuerySet.as_manager()
