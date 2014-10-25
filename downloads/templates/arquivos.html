@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block bootstrap3_extra_script  %}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/escolar-arquivo.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/cursoextensao-arquivo.js"></script>
 {% endblock %}
 
 {% block content %}
     <div class="panel panel-info">
-        <div class="panel-heading">Arquivos</div>
+        <div class="panel-heading">Monografias</div>
         <div class="panel-body">
             <form method="get">
                 <div class="input-group">
@@ -25,7 +25,7 @@
                         <span class="badge">{{ arquivo.downloads }}</span>
                     </a>
                 {% empty %}
-                    <div class="alert alert-info">Nenhum arquivo encontrado</div>
+                    <div class="alert alert-info">Nenhuma monografia encontrada</div>
                 {% endfor %}
             </div>
             <ul class="pager">
