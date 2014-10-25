@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator, EmptyPage
 from django.core.serializers import serialize
-from django.contrib.auth.decorators import user_passes_test, login_required
+from django.contrib.auth.decorators import user_passes_test
 from downloads.models import Arquivo, ArquivoHistorico
 
 
@@ -43,7 +43,6 @@ def arquivos(request):
     return render(request, 'arquivos.html', {'arquivos': lista_arquivos, 'q': q})
 
 
-@login_required
 def info(request, slug):
     arquivo = get_object_or_404(Arquivo, slug=slug)
     obj_to_json = lambda obj: json.loads(serialize('json', obj))
