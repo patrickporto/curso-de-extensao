@@ -14,11 +14,12 @@ def documentos(request):
     obj = DocumentosPendentes.objects.filter(aluno=request.user).first()
 
     if obj:
-        for documento in obj.documentos[1:-1].split(','):
+        obj_list = ''.join(filter(str.isdigit, str(obj.documentos)))
+        for documento in obj_list:
             if not documento:
                 continue
 
-            documentos_pendentes.append(get_documento_display(int(documento.strip()[1:-1])))
+            documentos_pendentes.append(get_documento_display(int(documento)))
 
         if obj.outros:
             documentos_pendentes += obj.outros.split(',')
