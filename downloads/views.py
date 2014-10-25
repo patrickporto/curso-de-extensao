@@ -2,12 +2,12 @@
 
 import json
 
-from django.shortcuts import get_object_or_404, get_list_or_404, render
-from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.decorators import user_passes_test
 from django.core.paginator import Paginator, EmptyPage
 from django.core.serializers import serialize
-from django.contrib.auth.decorators import user_passes_test
-from downloads.models import Arquivo, ArquivoHistorico
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404, get_list_or_404, render
+from downloads.models import Monografia, ArquivoHistorico
 
 
 def _get_client_ip(request):
@@ -20,7 +20,7 @@ def _get_client_ip(request):
 
 
 def download(request, slug):
-    arquivo = get_object_or_404(Arquivo, slug=slug)
+    arquivo = get_object_or_404(Monografia, slug=slug)
     arquivo.downloads += 1
     arquivo.save()
     arquivo.registre(request.user, _get_client_ip(request))
@@ -29,11 +29,11 @@ def download(request, slug):
     return response
 
 
-def arquivos(request):
+def monografias(request):
     page = int(request.GET.get('page', 1))
     q = request.GET.get('q', '')
 
-    qs = Arquivo.objects.pesquisa(q)
+    qs = Monografia.objects.pesquisa(q)
     paginator = Paginator(qs, 25)
     try:
         lista_arquivos = paginator.page(page)
@@ -44,7 +44,7 @@ def arquivos(request):
 
 
 def info(request, slug):
-    arquivo = get_object_or_404(Arquivo, slug=slug)
+    arquivo = get_object_or_404(Monografia, slug=slug)
     obj_to_json = lambda obj: json.loads(serialize('json', obj))
     formatted = obj_to_json([arquivo])[0]
     formatted['url'] = arquivo.get_absolute_url()

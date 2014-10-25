@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.conf import settings
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'', include('portal.urls')),
-    url(r'^arquivos/', include('downloads.urls')),
+    url(r'^monografias/', include('downloads.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
 

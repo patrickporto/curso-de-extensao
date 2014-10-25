@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from downloads.models import Arquivo, ArquivoHistorico
+from downloads.models import Monografia, ArquivoHistorico
 
 
-@admin.register(Arquivo)
+@admin.register(Monografia)
 class ArquivoAdmin(admin.ModelAdmin):
     list_display = ('nome', 'slug',)
     readonly_fields = ('downloads',)

@@ -28,7 +28,7 @@ class ArquivoQuerySet(models.QuerySet):
         return self.filter(Q(nome__icontains=query) | Q(descricao__icontains=query))
 
 
-class Arquivo(models.Model):
+class Monografia(models.Model):
     nome = models.CharField(max_length=255, verbose_name='Nome')
     slug = AutoSlugField(populate_from='nome', unique=True)
     descricao = models.TextField(verbose_name='Descrição', blank=True)
@@ -53,7 +53,7 @@ class Arquivo(models.Model):
 
 class ArquivoHistorico(models.Model):
     data = models.DateTimeField(auto_now_add=True, verbose_name="Data da Ação")
-    arquivo = models.ForeignKey(Arquivo, verbose_name='Arquivo')
+    arquivo = models.ForeignKey(Monografia, verbose_name='Arquivo')
     ip = models.IPAddressField(verbose_name='Endereço IP')
     usuario = models.CharField(max_length=255, verbose_name="Usuário")
 

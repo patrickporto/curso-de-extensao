@@ -22,7 +22,7 @@
 				<div class="collapse navbar-collapse" id="main-navbar">
 					<ul class="nav navbar-nav">
 						{% item request 'home' %}
-						{% item request 'arquivos' %}
+						{% item request 'monografias' %}
                         {% if request.user.is_authenticated and request.user.tipo == request.user.ALUNO %}
 						    {% item request 'disciplinas' %}
                         {% endif %}
