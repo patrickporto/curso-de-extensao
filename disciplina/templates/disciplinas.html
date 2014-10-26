@@ -11,6 +11,7 @@
                             <th>Disciplina</th>
                             <th>Professor</th>
                             <th class="text-center">Faltas</th>
+                            <th class="text-center">Abonos Válidos</th>
                             <th class="text-center">Nota</th>
                             <th class="text-center">Situação</th>
                         </tr>
@@ -21,6 +22,13 @@
                                 <td>{{ avaliacao.disciplina.nome }}</td>
                                 <td>{{ avaliacao.disciplina.professor.get_full_name }}</td>
                                 <td class="text-center">{{ avaliacao.faltas }}</td>
+                                <td class="text-center">
+                                    {% if avaliacao.abonos >= avaliacao.disciplina.limite_abonos %}
+                                        {{ avaliacao.disciplina.limite_abonos }}
+                                    {% else %}
+                                        {{ avaliacao.abonos }}
+                                    {% endif %}
+                                </td>
                                 <td class="text-center">{{ avaliacao.nota|default_if_none:"-----" }}</td>
                                 <td class="text-center">{{ avaliacao.get_situacao_display }}</td>
                             </tr>

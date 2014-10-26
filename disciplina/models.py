@@ -79,15 +79,15 @@ class Disciplina(models.Model):
 class Avaliacao(models.Model):
     CURSANDO = 'cursando'
     APROVADO = 'aprovado'
-    REPROVADO_MEDIA = 'reprovado por media'
-    REPROVADO_FALTA = 'reprovado por faltas'
-    REPROVADO_MEDIA_FALTA = 'reprovado por media e faltas'
+    REPROVADO_MEDIA = 'reprovado por grau'
+    REPROVADO_FALTA = 'reprovado por frequencia'
+    REPROVADO_MEDIA_FALTA = 'reprovado por grau e frequencia'
     CHOICES_SITUACAO = (
         (CURSANDO, 'Cursando',),
         (APROVADO, 'Aprovado',),
-        (REPROVADO_MEDIA, 'Reprovado por média'),
-        (REPROVADO_FALTA, 'Reprovado por faltas'),
-        (REPROVADO_MEDIA_FALTA, 'Reprovado por média e faltas'),
+        (REPROVADO_MEDIA, 'Reprovado por grau'),
+        (REPROVADO_FALTA, 'Reprovado por frequência'),
+        (REPROVADO_MEDIA_FALTA, 'Reprovado por grau e frequência'),
 
     )
     disciplina = models.ForeignKey(Disciplina)
