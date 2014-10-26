@@ -6,9 +6,7 @@ from disciplina.forms import DisciplinaForm
 
 
 def atualizar_situacao(modeladmin, request, queryset):
-    # Aprovar os alunos com nota igual ou superior a média de aprovação e faltas igual ou inferior ao limte
     queryset.aprovados().update(situacao=Avaliacao.APROVADO)
-    # Reprovar os alunos com nota inferior a média de aprovação e faltas superior ao limte
     queryset.reprovados().update(situacao=Avaliacao.REPROVADO)
 
 atualizar_situacao.short_description = "Atualizar situação dos alunos selecionados"
@@ -28,6 +26,7 @@ class DisciplinaAdmin(admin.ModelAdmin):
 class AvaliacaoAdmin(admin.ModelAdmin):
     list_display = ('aluno', 'disciplina', 'nota', 'faltas', 'situacao',)
     list_editable = ('nota', 'faltas', )
+    list_display_links = None
     search_fields = ('aluno__nome', 'aluno__sobrenome', 'disciplina__nome', 'disciplina__professor__nome', 'disciplina__professor__sobrenome', )
     list_filter = ('disciplina__periodo__nome', 'disciplina__nome',)
     actions = [atualizar_situacao]
