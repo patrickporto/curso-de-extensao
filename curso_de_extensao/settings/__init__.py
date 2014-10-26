@@ -129,5 +129,7 @@ BUSINESS = {
     'media_aprovacao': 5,
 }
 
+IFRAME_URL = 'http://www.del.ufrj.br/~fmello/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
