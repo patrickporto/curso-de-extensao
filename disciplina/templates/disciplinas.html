@@ -4,27 +4,6 @@
     <div class="panel panel-info">
         <div class="panel-heading">Disciplinas e Avaliações</div>
         <div class="panel-body">
-            {% if periodos %}
-            <div class="row-fluid">
-                <form method="get" class="form-inline" role="form">
-                    <div class="form-group">
-                        <label for="periodo">Período:</label>
-                        <div class="input-group">
-                            <select name="periodo" id="periodo" class="form-control">
-                                <option value="0">Todos</option>
-                                {% for periodo in periodos %}
-                                    <option value="{{ periodo.pk }}" {% if periodo.pk == periodo_id %}selected{% endif %}>{{ periodo.nome }}</option>
-                                {% endfor %}
-                            </select>
-                            <span class="input-group-btn">
-                                <button type="submit" class="btn btn-default btn-info"><span class="glyphicon glyphicon-search"></span> <span class="hidden-xs hidden-sm">Buscar</span></button>
-                            </span>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <br/>
-            {% endif %}
             <div class="row-fluid table-responsive">
                 <table class="table table-bordered table-striped">
                     <thead>
