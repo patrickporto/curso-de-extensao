@@ -22,8 +22,9 @@ class DocumentosPendentesInline(admin.StackedInline):
 
 @admin.register(Pessoa)
 class PessoaAdmin(UserAdmin):
+    add_form_template = 'admin/pessoa/add_form.html'
     list_display = ('get_full_name', 'cpf', 'data_nascimento', 'tipo', )
-    list_display_links = ('get_full_name', 'cpf',)
+    list_display_links = ('get_full_name',)
     list_filter = ('tipo', 'is_active',)
     search_fields = ('nome', 'sobrenome', 'cpf',)
     readonly_fields = ('data_criacao', 'data_atualizacao',)
