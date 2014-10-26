@@ -12,7 +12,7 @@ def home(request):
     return render(request, 'base.html')
 
 
-def contato(request):
+def witty(request):
     return render(request, 'base.html')
 
 
