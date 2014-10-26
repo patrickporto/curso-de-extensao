@@ -13,3 +13,4 @@ build/
 Vagrantfile
 *.sqlite3
 .vagrant
+media/
