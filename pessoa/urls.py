@@ -2,6 +2,9 @@
 
 from django.conf.urls import patterns, url
 
-urlpatterns = patterns('pessoa.views',
-    url(r'^documentos_pendentes/$', 'documentos', name='documentos'),
+from pessoa.views import documentos
+
+urlpatterns = patterns(
+    'pessoa.views',
+    url(r'^pendencias/$', documentos, name='pendencias'),
 )
