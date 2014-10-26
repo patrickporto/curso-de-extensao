@@ -80,8 +80,9 @@ class Avaliacao(models.Model):
     CURSANDO = 'cursando'
     APROVADO = 'aprovado'
     REPROVADO_MEDIA = 'reprovado por grau'
-    REPROVADO_FALTA = 'reprovado por frequencia'
+    REPROVADO_FALTA = 'reprovado por frequência'
     REPROVADO_MEDIA_FALTA = 'reprovado por grau e frequencia'
+
     CHOICES_SITUACAO = (
         (CURSANDO, 'Cursando',),
         (APROVADO, 'Aprovado',),
@@ -101,6 +102,18 @@ class Avaliacao(models.Model):
 
     def __unicode__(self):
         return u'{0} - {1}'.format(self.aluno, self.disciplina)
+
+    def get_situacao(self):
+        if self.situacao == self.REPROVADO_MEDIA_FALTA:
+            return u'Reprovado por Grau e Frequência'
+        elif self.situacao == self.REPROVADO_FALTA:
+            return u'Reprovado por Frequência'
+        elif self.situacao == self.REPROVADO_MEDIA:
+            return u'Reprovado por Grau'
+        elif self.situacao == self.APROVADO:
+            return u'Aprovado'
+        else:
+            return u'Cursando'
 
     class Meta:
         verbose_name = "Avaliação"

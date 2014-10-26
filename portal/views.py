@@ -3,10 +3,11 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.conf import settings
+from disciplina.models import Avaliacao
 
 
 def home(request):
@@ -16,6 +17,37 @@ def home(request):
 def witty(request):
     context = {'link': settings.IFRAME_URL}
     return render(request, 'witty.html', context)
+
+
+# from disciplina.models import Periodo
+
+# @user_passes_test(lambda u: u.tipo == u.ALUNO)
+# def disciplinas(request):
+#     periodo_id = int(request.GET.get('periodo', 0))
+#     context = {}
+#     avaliacoes = Avaliacao.objects.filter(aluno=request.user)
+#     periodos = Periodo.objects.filter(pk__in=avaliacoes.values('disciplina__periodo').distinct())
+#     if periodo_id:
+#         avaliacoes = avaliacoes.filter(disciplina__periodo__id=periodo_id)
+#     if avaliacoes.count() == 0 and periodo_id:
+#         messages.add_message(request, messages.ERROR, 'O período informado não existe')
+
+#     context['periodo_id'] = periodo_id
+#     context['avaliacoes'] = avaliacoes
+#     context['periodos'] = periodos
+
+#     return render(request, 'disciplinas.html', context)
+
+
+@user_passes_test(lambda u: u.tipo == u.FUNCIONARIO)
+def historicos(request):
+    context = {}
+    alunos_pk_list = Avaliacao.objects.values_list('aluno__pk').distinct()
+    alunos = Avaliacao.objects.filter(aluno__pk__in=alunos_pk_list)
+    historicos = Avaliacao.objects.all()
+    context['alunos'] = alunos
+    context['historicos'] = historicos
+    return render(request, 'historico.html', context)
 
 
 def access(request):
