@@ -1,0 +1,8 @@
+{% extends "admin/change_list.html" %}
+
+{% block content_title %}<h1>Veja o Histórico de Downloads</h1>{% endblock %}
+
+{% block footer %}
+    {{block.super}}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/cursoextensao-historico_downloads.js"></script>
+{% endblock %}

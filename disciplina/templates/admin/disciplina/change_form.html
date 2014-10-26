@@ -5,11 +5,10 @@
     <li><a href="{% url 'admin:disciplina_avaliacao_changelist' %}?disciplina__nome={{ original.nome }}">Avaliações</a></li>
 {% endblock %}
 
-{% block extrastyle %}{{ block.super }}<style type="text/css">
-.datetimeshortcuts a{
-    display: none;
-}
-.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
-    display: none
-}
-</style>{% endblock %}
+{% block extrastyle %}
+    {{ block.super }}
+    <style type="text/css">
+        .deletelink-box {display: none}
+        .submit-row input[name="_addanother"], .submit-row input[name="_continue"]{display: none}
+    </style>
+{% endblock %}
