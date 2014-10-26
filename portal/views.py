@@ -27,7 +27,7 @@ def access(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.add_message(request, messages.SUCCESS, 'Usuário autenticado com sucesso!')
+            # messages.add_message(request, messages.SUCCESS, 'Usuário autenticado com sucesso!')
         else:
             messages.add_message(request, messages.ERROR, 'Usuário ou senha inválida!')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
@@ -35,7 +35,7 @@ def access(request):
 
 def user_logout(request):
     logout(request)
-    messages.add_message(request, messages.WARNING, 'Você desconectou-se')
+    # messages.add_message(request, messages.WARNING, 'Você desconectou-se')
     return HttpResponseRedirect('/')
 
 
