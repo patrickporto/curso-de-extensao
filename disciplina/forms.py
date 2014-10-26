@@ -13,4 +13,12 @@ class DisciplinaForm(forms.ModelForm):
 
     class Meta:
         model = Disciplina
-        fields = ('nome', 'limite_faltas', 'periodo', 'professor', 'aluno',)
+        fields = (
+            'nome',
+            'limite_faltas',
+            'limite_abonos',
+            'data_inicio',
+            'data_termino',
+            'professor',
+            'aluno',
+        )

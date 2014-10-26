@@ -8,12 +8,39 @@ from pessoa.models import Pessoa
 
 class AvaliacaoQuerySet(models.QuerySet):
     def aprovados(self):
-        return self.filter(nota__gte=settings.BUSINESS['media_aprovacao'],
-                           faltas__lte=models.F('disciplina__limite_faltas'))
+        return self.filter(
+            (
+                models.Q(nota__gte=settings.BUSINESS['media_aprovacao']) &
+                models.Q(faltas__lte=models.F('disciplina__limite_faltas'))
+            ) |
+            (
+                models.Q(faltas__gt=models.F('disciplina__limite_faltas')) &
+                models.Q(abonos__gte=models.F('disciplina__limite_abonos')) &
+                models.Q(disciplina__limite_faltas__gte=models.F('faltas') - models.F('disciplina__limite_abonos'))
+            ) |
+            (
+                models.Q(faltas__gt=models.F('disciplina__limite_faltas')) &
+                models.Q(abonos__lt=models.F('disciplina__limite_abonos')) &
+                models.Q(disciplina__limite_faltas__gte=(models.F('faltas') - models.F('abonos')))
+            )
+        )
 
-    def reprovados(self):
-        return self.filter(models.Q(nota__lt=settings.BUSINESS['media_aprovacao']) |
-                           models.Q(faltas__gt=models.F('disciplina__limite_faltas')))
+    def reprovados_media(self):
+        return self.filter(models.Q(nota__lt=settings.BUSINESS['media_aprovacao']))
+
+    def reprovados_falta(self):
+        return self.filter(
+            (
+                models.Q(faltas__gt=models.F('disciplina__limite_faltas')) &
+                models.Q(abonos__gte=models.F('disciplina__limite_abonos')) &
+                models.Q(disciplina__limite_faltas__lt=models.F('faltas') - models.F('disciplina__limite_abonos'))
+            ) |
+            (
+                models.Q(faltas__gt=models.F('disciplina__limite_faltas')) &
+                models.Q(abonos__lt=models.F('disciplina__limite_abonos')) &
+                models.Q(disciplina__limite_faltas__lt=(models.F('faltas') - models.F('abonos')))
+            )
+        )
 
 
 class AvaliacaoManager(models.Manager):
@@ -23,23 +50,19 @@ class AvaliacaoManager(models.Manager):
     def aprovados(self):
         return self.get_queryset().aprovados()
 
-    def reprovados(self):
-        return self.get_queryset().reprovados()
+    def reprovados_media(self):
+        return self.get_queryset().reprovados_media()
 
-
-class Periodo(models.Model):
-    nome = models.CharField(max_length=255, verbose_name="Período")
-    data_inicio = models.DateField(verbose_name='Data de início', default=timezone.now)
-    data_termino = models.DateField(verbose_name='Data de término', default=timezone.now)
-
-    def __unicode__(self):
-        return self.nome
+    def reprovados_falta(self):
+        return self.get_queryset().reprovados_falta()
 
 
 class Disciplina(models.Model):
     nome = models.CharField(max_length=255, verbose_name='Disciplina')
     limite_faltas = models.IntegerField(verbose_name='Limite de faltas')
-    periodo = models.ManyToManyField(Periodo)
+    limite_abonos = models.IntegerField(verbose_name='Limite de abonos')
+    data_inicio = models.DateField(verbose_name='Data de início')
+    data_termino = models.DateField(verbose_name='Data de término')
     professor = models.ForeignKey(Pessoa, limit_choices_to={'tipo': Pessoa.PROFESSOR}, related_name='professor')
     aluno = models.ManyToManyField(Pessoa, limit_choices_to={'tipo': Pessoa.ALUNO}, related_name='alunos', null=True, blank=True)
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação', default=timezone.now)
@@ -56,16 +79,22 @@ class Disciplina(models.Model):
 class Avaliacao(models.Model):
     CURSANDO = 'cursando'
     APROVADO = 'aprovado'
-    REPROVADO = 'reprovado'
+    REPROVADO_MEDIA = 'reprovado por media'
+    REPROVADO_FALTA = 'reprovado por faltas'
+    REPROVADO_MEDIA_FALTA = 'reprovado por media e faltas'
     CHOICES_SITUACAO = (
         (CURSANDO, 'Cursando',),
         (APROVADO, 'Aprovado',),
-        (REPROVADO, 'Reprovado'),
+        (REPROVADO_MEDIA, 'Reprovado por média'),
+        (REPROVADO_FALTA, 'Reprovado por faltas'),
+        (REPROVADO_MEDIA_FALTA, 'Reprovado por média e faltas'),
+
     )
     disciplina = models.ForeignKey(Disciplina)
     aluno = models.ForeignKey(Pessoa, limit_choices_to={'tipo': Pessoa.ALUNO})
     nota = models.DecimalField(verbose_name='Nota', decimal_places=2, max_digits=5, default=None, null=True, blank=True)
     faltas = models.IntegerField(verbose_name='Faltas', default=0)
+    abonos = models.IntegerField(verbose_name='Abonos', default=0)
     situacao = models.CharField(max_length=255, verbose_name='Situação', choices=CHOICES_SITUACAO, default=CURSANDO)
 
     objects = AvaliacaoManager()
