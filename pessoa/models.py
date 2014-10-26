@@ -89,7 +89,7 @@ class Pessoa(AbstractBaseUser):
     def __unicode__(self):
         if self.tipo == self.FUNCIONARIO:
             return self.get_full_name()
-        return u'{0} - {1}'.format(self.get_full_name(), self.cpf)
+        return u'{0}'.format(self.get_full_name())
 
     class Meta:
         verbose_name = 'Pessoa'
