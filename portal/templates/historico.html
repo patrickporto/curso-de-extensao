@@ -44,7 +44,7 @@
                                 <td>{{ historico.disciplina.nome }}</td>
                                 <td class="text-center">{{ historico.faltas }}</td>
                                 <td class="text-center">{{ historico.abonos }}</td>
-                                <td class="text-center">{{ historico.nota }}</td>
+                                <td class="text-center">{{ historico.nota|default_if_none:"-----" }}</td>
                                 <td class="text-center">{{ historico.get_situacao }}</td>
                             </tr>
                         {% empty %}
