@@ -8,6 +8,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.conf import settings
 from disciplina.models import Avaliacao
+from pessoa.models import Pessoa
 
 
 def home(request):
@@ -42,9 +43,17 @@ def witty(request):
 @user_passes_test(lambda u: u.tipo == u.FUNCIONARIO)
 def historicos(request):
     context = {}
+    aluno_id = int(request.GET.get('aluno', 0))
     alunos_pk_list = Avaliacao.objects.values_list('aluno__pk').distinct()
-    alunos = Avaliacao.objects.filter(aluno__pk__in=alunos_pk_list)
+    alunos = Pessoa.objects.filter(id__in=alunos_pk_list)
     historicos = Avaliacao.objects.all()
+
+    if aluno_id:
+        historicos = historicos.filter(aluno__id=aluno_id)
+    if historicos.count() == 0 and aluno_id:
+        messages.add_message(request, messages.ERROR, 'O aluno informado não existe')
+
+    context['aluno_id'] = aluno_id
     context['alunos'] = alunos
     context['historicos'] = historicos
     return render(request, 'historico.html', context)

@@ -10,7 +10,7 @@
                     <select name="aluno" id="aluno" class="form-control">
                         <option value="0">Todos</option>
                         {% for aluno in alunos %}
-                            <option value="{{ aluno.pk }}">{{ aluno.nome }}</option>
+                            <option value="{{ aluno.pk }}" {% if aluno.pk == aluno_id %}selected{% endif %}>{{ aluno.get_full_name }}</option>
                         {% endfor %}
                     </select>
                     <span class="input-group-btn">
