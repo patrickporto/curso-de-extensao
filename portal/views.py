@@ -20,26 +20,6 @@ def witty(request):
     return render(request, 'witty.html', context)
 
 
-# from disciplina.models import Periodo
-
-# @user_passes_test(lambda u: u.tipo == u.ALUNO)
-# def disciplinas(request):
-#     periodo_id = int(request.GET.get('periodo', 0))
-#     context = {}
-#     avaliacoes = Avaliacao.objects.filter(aluno=request.user)
-#     periodos = Periodo.objects.filter(pk__in=avaliacoes.values('disciplina__periodo').distinct())
-#     if periodo_id:
-#         avaliacoes = avaliacoes.filter(disciplina__periodo__id=periodo_id)
-#     if avaliacoes.count() == 0 and periodo_id:
-#         messages.add_message(request, messages.ERROR, 'O período informado não existe')
-
-#     context['periodo_id'] = periodo_id
-#     context['avaliacoes'] = avaliacoes
-#     context['periodos'] = periodos
-
-#     return render(request, 'disciplinas.html', context)
-
-
 @user_passes_test(lambda u: u.tipo == u.FUNCIONARIO)
 def historicos(request):
     context = {}
@@ -70,7 +50,6 @@ def access(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            # messages.add_message(request, messages.SUCCESS, 'Usuário autenticado com sucesso!')
         else:
             messages.add_message(request, messages.ERROR, 'Usuário ou senha inválida!')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
@@ -78,7 +57,6 @@ def access(request):
 
 def user_logout(request):
     logout(request)
-    # messages.add_message(request, messages.WARNING, 'Você desconectou-se')
     return HttpResponseRedirect('/')
 
 
