@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-
-from django.test import TestCase
+from django.core.urlresolvers import reverse
+from django.forms.models import model_to_dict
+from django.test import TestCase, Client
 from datetime import date
 from pessoa.models import Pessoa, Contato
 
@@ -63,3 +64,49 @@ class PessoaTest(TestCase):
             descricao='fulano@email.com',
             pessoa=professor
         )
+
+
+class PessoaAdminTest(TestCase):
+
+    def setUp(self):
+        funcionario = Pessoa()
+        funcionario.nome = 'Fulano',
+        funcionario.set_password('123')
+        funcionario.email = 'fulano@fulanocorp.com'
+        funcionario.sobrenome = 'da Silva'
+        funcionario.data_nascimento = date(1994, 1, 19)
+        funcionario.cpf = '000.000.000-00'
+        funcionario.tipo = Pessoa.FUNCIONARIO
+        funcionario.save()
+
+        self.c = Client()
+        self.c.login(cpf=funcionario.cpf, password='123')
+
+    def test_transformar_professor_em_aluno(self):
+        pessoa = Pessoa()
+        pessoa.nome = 'fulaninho',
+        pessoa.set_password('123')
+        pessoa.email = 'fulanobolado@hotmail.com'
+        pessoa.sobrenome = 'da Silva'
+        pessoa.data_nascimento = date(1994, 1, 19)
+        pessoa.cpf = '333.333.333-33'
+        pessoa.tipo = Pessoa.PROFESSOR
+        pessoa.save()
+
+        data = model_to_dict(pessoa)
+        data['tipo'] = Pessoa.ALUNO
+        data['contato_set-TOTAL_FORMS'] = 1
+        data['contato_set-INITIAL_FORMS'] = 1
+        data['contato_set-MIN_NUM_FORMS'] = 1
+        data['contato_set-MAX_NUM_FORMS'] = 1000
+        data['contato_set-0-tipo'] = 'telefone'
+        data['contato_set-0-descricao'] = '(11)11111-1111'
+        data['contato_set-0-id'] = 1
+        data['contato_set-0-pessoa'] = pessoa.id
+
+        response = self.c.post(
+            reverse('admin:pessoa_pessoa_change', args=(pessoa.id,)),
+            data
+        )
+
+        self.assertEqual(response.status_code, 200)
