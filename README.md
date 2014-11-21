@@ -1,3 +1,4 @@
+![](https://travis-ci.org/patrickporto/curso-de-extensao.svg?branch=master)
 ## Introdução ##
 Projeto em Python/Django para a criação de um portal dos Cursos de Extensão do DEL da UFRJ.
 
