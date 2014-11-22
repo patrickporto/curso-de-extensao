@@ -80,7 +80,7 @@ class PessoaAdmin(UserAdmin):
 
     def get_formsets_with_inlines(self, request, obj=None):
         current = None
-        if not obj is None:
+        if obj:
             current = Pessoa.objects.get(pk=obj.pk)
         for inline in self.get_inline_instances(request, obj):
             if isinstance(inline, DocumentosPendentesInline):
