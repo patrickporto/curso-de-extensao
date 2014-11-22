@@ -86,7 +86,7 @@ class PessoaAdmin(UserAdmin):
             if isinstance(inline, DocumentosPendentesInline):
                 if obj is None or obj.tipo != obj.ALUNO:
                     continue
-            if current.tipo != obj.tipo:
+            if obj and  current.tipo != obj.tipo:
                     request.POST['documentospendentes-TOTAL_FORMS'] = 1
                     request.POST['documentospendentes-INITIAL_FORMS'] = 0
                     request.POST['documentospendentes-MIN_NUM_FORMS'] = 1
