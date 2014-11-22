@@ -110,3 +110,31 @@ class PessoaAdminTest(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
+
+    def test_create_professor(self):
+        pessoa = Pessoa()
+        pessoa.nome = 'fulaninho',
+        pessoa.set_password('123')
+        pessoa.email = 'fulanobolado@hotmail.com'
+        pessoa.sobrenome = 'da Silva'
+        pessoa.data_nascimento = date(1994, 1, 19)
+        pessoa.cpf = '333.333.333-33'
+        pessoa.tipo = Pessoa.PROFESSOR
+
+        data = model_to_dict(pessoa)
+        data['tipo'] = Pessoa.PROFESSOR
+        data['contato_set-TOTAL_FORMS'] = 1
+        data['contato_set-INITIAL_FORMS'] = 1
+        data['contato_set-MIN_NUM_FORMS'] = 1
+        data['contato_set-MAX_NUM_FORMS'] = 1000
+        data['contato_set-0-tipo'] = 'telefone'
+        data['contato_set-0-descricao'] = '(11)11111-1111'
+        data['contato_set-0-id'] = 1
+        data['contato_set-0-pessoa'] = pessoa.id
+
+        response = self.c.post(
+            reverse('admin:pessoa_pessoa_add'),
+            data
+        )
+
+        self.assertEqual(response.status_code, 200)
