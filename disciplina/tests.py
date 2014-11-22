@@ -99,18 +99,6 @@ class AvaliacaoTest(TestCase):
 
         self.assertEqual(avaliacoes_count, 2)
 
-    def test_autoremove_nota(self):
-        self.disciplina.aluno.remove(self.aluno)
-        self.disciplina.save()
-
-        self.assertEqual(Avaliacao.objects.count(), 0)
-
-    def test_autoremove_nota_when_remove_all_alunos(self):
-        self.disciplina.aluno.clear()
-        self.disciplina.save()
-
-        self.assertEqual(Avaliacao.objects.count(), 0)
-
 
 class DisciplinaAdminTest(TestCase):
     def setUp(self):

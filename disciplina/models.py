@@ -122,8 +122,6 @@ class Avaliacao(models.Model):
 
 def disciplina_m2m_changed(sender, instance, action, *args, **kwargs):
     if action in ['post_add', 'post_remove', 'post_clear']:
-        Avaliacao.objects.filter(disciplina=instance).exclude(aluno=instance.aluno.all).delete()
-
         for aluno in instance.aluno.all():
             Avaliacao.objects.get_or_create(aluno=aluno, disciplina=instance)
 
