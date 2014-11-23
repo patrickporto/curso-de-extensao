@@ -99,6 +99,16 @@ class AvaliacaoTest(TestCase):
 
         self.assertEqual(avaliacoes_count, 2)
 
+    def test_esconder_avaliacoes_de_alunos_fora_da_disciplina(self):
+        avaliacoes_count = Avaliacao.objects.count()
+
+        self.assertEqual(avaliacoes_count, 1)
+        self.disciplina.aluno.clear()
+        self.disciplina.save()
+        avaliacoes_count_2 = Avaliacao.objects.count()
+
+        self.assertEqual(avaliacoes_count_2, 0)
+
 
 class DisciplinaAdminTest(TestCase):
     def setUp(self):
